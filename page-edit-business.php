@@ -128,41 +128,41 @@ $selected_category = ! empty( $business_terms ) ? $business_terms[0]->term_id : 
 ?>
 
 <main id="primary" class="site-main">
-	<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-py-12">
-		<div class="shecy-max-w-2xl shecy-mx-auto shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md">
-			<header class="shecy-text-center shecy-mb-8">
-				<h1 class="shecy-text-3xl shecy-font-bold">Edit Business Listing</h1>
+	<div class="container mx-auto px-4 py-12">
+		<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+			<header class="text-center mb-8">
+				<h1 class="text-3xl font-bold">Edit Business Listing</h1>
 			</header>
 
 			<form id="edit-business-form" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="action" value="edit-business">
 				<?php wp_nonce_field( 'edit_business_' . $business_id, 'edit_business_nonce' ); ?>
 
-				<div class="shecy-space-y-6">
+				<div class="space-y-6">
 					<div>
 						<label for="business_name">Business Name</label>
-						<input type="text" name="business_name" id="business_name" value="<?php echo esc_attr( $post->post_title ); ?>" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						<input type="text" name="business_name" id="business_name" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 					</div>
 					<div>
 						<label for="business_description">Description</label>
-						<textarea name="business_description" id="business_description" rows="5" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+						<textarea name="business_description" id="business_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
 					</div>
 					<div>
 						<label for="business_services">Services</label>
-						<textarea name="business_services" id="business_services" rows="3" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm"><?php echo esc_textarea( $business_services ); ?></textarea>
+						<textarea name="business_services" id="business_services" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea( $business_services ); ?></textarea>
 					</div>
 					<div>
 						<label for="business_category">Category</label>
-						<?php wp_dropdown_categories( array('taxonomy' => 'shecy_business_category', 'name' => 'business_category', 'id' => 'business_category', 'required' => true, 'selected' => $selected_category, 'hierarchical' => true, 'class' => 'shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm') ); ?>
+						<?php wp_dropdown_categories( array('taxonomy' => 'shecy_business_category', 'name' => 'business_category', 'id' => 'business_category', 'required' => true, 'selected' => $selected_category, 'hierarchical' => true, 'class' => 'mt-1 block w-full border-gray-300 rounded-md shadow-sm') ); ?>
 					</div>
-					<div class="shecy-grid shecy-grid-cols-1 md:shecy-grid-cols-2 shecy-gap-6">
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="business_address">Address</label>
-							<input type="text" name="business_address" id="business_address" value="<?php echo esc_attr( get_post_meta( $business_id, 'business_address', true ) ); ?>" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<input type="text" name="business_address" id="business_address" value="<?php echo esc_attr( get_post_meta( $business_id, 'business_address', true ) ); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
 							<label for="business_city">City</label>
-							<select name="business_city" id="business_city" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<select name="business_city" id="business_city" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 								<option value="">Select a city</option>
 								<?php
 								$cities = shecy_get_cyprus_cities();
@@ -175,38 +175,38 @@ $selected_category = ! empty( $business_terms ) ? $business_terms[0]->term_id : 
 						</div>
 						<div>
 							<label for="business_phone">Phone</label>
-							<input type="tel" name="business_phone" id="business_phone" value="<?php echo esc_attr($business_phone); ?>" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<input type="tel" name="business_phone" id="business_phone" value="<?php echo esc_attr($business_phone); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
 							<label for="business_email">Email</label>
-							<input type="email" name="business_email" id="business_email" value="<?php echo esc_attr($business_email); ?>" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<input type="email" name="business_email" id="business_email" value="<?php echo esc_attr($business_email); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
 							<label for="business_website">Website</label>
-							<input type="url" name="business_website" id="business_website" value="<?php echo esc_attr($business_website); ?>" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<input type="url" name="business_website" id="business_website" value="<?php echo esc_attr($business_website); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 					</div>
 					<div>
 						<label>Current Images</label>
-						<div class="shecy-mt-1 shecy-flex shecy-flex-wrap shecy-gap-4">
+						<div class="mt-1 flex flex-wrap gap-4">
 							<?php
 							$gallery_ids = get_post_meta( $business_id, 'business_gallery_ids', true );
 							if ( ! empty( $gallery_ids ) ) {
 								foreach ( $gallery_ids as $attachment_id ) {
-									echo '<div class="shecy-w-24 shecy-h-24">' . wp_get_attachment_image( $attachment_id, 'thumbnail' ) . '</div>';
+									echo '<div class="w-24 h-24">' . wp_get_attachment_image( $attachment_id, 'thumbnail' ) . '</div>';
 								}
 							} else {
 								echo '<p>No images set.</p>';
 							}
 							?>
 						</div>
-						<label for="business_images" class="shecy-mt-4">Upload New Images</label>
-						<input type="file" name="business_images[]" id="business_images" accept="image/*" multiple class="shecy-mt-1 shecy-block shecy-w-full">
+						<label for="business_images" class="mt-4">Upload New Images</label>
+						<input type="file" name="business_images[]" id="business_images" accept="image/*" multiple class="mt-1 block w-full">
 					</div>
 				</div>
 
-				<div class="shecy-mt-8">
-					<button type="submit" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-pink-500 hover:shecy-bg-pink-600">Save Changes</button>
+				<div class="mt-8">
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Save Changes</button>
 				</div>
 			</form>
 		</div>

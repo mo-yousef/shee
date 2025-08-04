@@ -110,7 +110,7 @@ add_action( 'after_setup_theme', 'shecy_setup' );
  */
 function shecy_scripts() {
 	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), SHECY_VERSION );
-	wp_enqueue_script( 'shecy-main', get_template_directory_uri() . '/assets/js/main.js', array(), SHECY_VERSION, true );
+	wp_enqueue_script( 'main', get_template_directory_uri() . '/assets/js/main.js', array(), SHECY_VERSION, true );
 	wp_enqueue_script( 'alpine', 'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js', array(), null, true );
 	wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css', array(), '4.0' );
 	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js', array(), '4.0', true );
@@ -454,12 +454,10 @@ function shecy_get_cyprus_cities() {
     );
 }
 
-function shecy_track_post_views( $post_id ) {
+function shecy_track_post_views() {
     if ( ! is_single() ) return;
-    if ( empty( $post_id ) ) {
-        global $post;
-        $post_id = $post->ID;
-    }
+    global $post;
+    $post_id = $post->ID;
 
     // Use a cookie to track unique views
     if ( isset( $_COOKIE['shecy_viewed_post_' . $post_id] ) ) {
@@ -473,6 +471,7 @@ function shecy_track_post_views( $post_id ) {
     // Set a cookie for 1 hour
     setcookie( 'shecy_viewed_post_' . $post_id, 'true', time() + 3600, '/' );
 }
+add_action( 'wp_head', 'shecy_track_post_views' );
 add_action( 'after_switch_theme', 'shecy_create_system_pages' );
 
 /**
