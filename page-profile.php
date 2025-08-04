@@ -63,14 +63,14 @@ $user_info = get_userdata($user_id);
 ?>
 
 <main id="primary" class="site-main">
-	<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-py-12">
-		<div class="shecy-max-w-2xl shecy-mx-auto">
-			<header class="shecy-text-center shecy-mb-8">
-				<h1 class="shecy-text-3xl shecy-font-bold">Profile Settings</h1>
+	<div class="container mx-auto px-4 py-12">
+		<div class="max-w-2xl mx-auto">
+			<header class="text-center mb-8">
+				<h1 class="text-3xl font-bold">Profile Settings</h1>
 			</header>
 
 			<?php if ( isset($_GET['updated']) && $_GET['updated'] == 'true' ): ?>
-				<div class="shecy-bg-green-100 shecy-border-l-4 shecy-border-green-500 shecy-text-green-700 shecy-p-4 shecy-mb-6" role="alert">
+				<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
 					<p>Profile updated successfully!</p>
 				</div>
 			<?php endif; ?>
@@ -79,50 +79,50 @@ $user_info = get_userdata($user_id);
 				<input type="hidden" name="action" value="update-profile">
 				<?php wp_nonce_field( 'update_profile_' . $user_id, 'profile_nonce' ); ?>
 
-				<div class="shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md shecy-mb-8">
-					<h2 class="shecy-text-2xl shecy-font-bold shecy-mb-6">Your Information</h2>
-					<div class="shecy-space-y-6">
+				<div class="bg-white p-8 rounded-lg shadow-md mb-8">
+					<h2 class="text-2xl font-bold mb-6">Your Information</h2>
+					<div class="space-y-6">
 						<div>
-							<label class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Avatar</label>
-							<div class="shecy-mt-2 shecy-flex shecy-items-center">
-								<?php echo get_avatar($user_id, 96, '', 'User Avatar', ['class' => 'shecy-rounded-full']); ?>
-								<p class="shecy-ml-4 shecy-text-gray-600">You can change your profile picture on <a href="https://gravatar.com/" target="_blank" class="shecy-text-pink-500 hover:shecy-underline">Gravatar</a>.</p>
+							<label class="block text-sm font-medium text-gray-700">Avatar</label>
+							<div class="mt-2 flex items-center">
+								<?php echo get_avatar($user_id, 96, '', 'User Avatar', ['class' => 'rounded-full']); ?>
+								<p class="ml-4 text-gray-600">You can change your profile picture on <a href="https://gravatar.com/" target="_blank" class="text-pink-500 hover:underline">Gravatar</a>.</p>
 							</div>
 						</div>
 						<div>
-							<label for="display_name" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Display Name</label>
-							<input type="text" name="display_name" id="display_name" value="<?php echo esc_attr($user_info->display_name); ?>" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<label for="display_name" class="block text-sm font-medium text-gray-700">Display Name</label>
+							<input type="text" name="display_name" id="display_name" value="<?php echo esc_attr($user_info->display_name); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
-							<label for="user_email" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Email Address</label>
-							<input type="email" name="user_email" id="user_email" value="<?php echo esc_attr($user_info->user_email); ?>" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<label for="user_email" class="block text-sm font-medium text-gray-700">Email Address</label>
+							<input type="email" name="user_email" id="user_email" value="<?php echo esc_attr($user_info->user_email); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
-							<label for="description" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Biographical Info</label>
-							<textarea name="description" id="description" rows="4" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm"><?php echo esc_textarea($user_info->description); ?></textarea>
-							<p class="shecy-mt-2 shecy-text-sm shecy-text-gray-500">Share a little about yourself. This will be displayed on your author profile.</p>
+							<label for="description" class="block text-sm font-medium text-gray-700">Biographical Info</label>
+							<textarea name="description" id="description" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea($user_info->description); ?></textarea>
+							<p class="mt-2 text-sm text-gray-500">Share a little about yourself. This will be displayed on your author profile.</p>
 						</div>
 					</div>
-					<div class="shecy-mt-8">
-						<button type="submit" name="update_info" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-pink-500 hover:shecy-bg-pink-600">Update Profile</button>
+					<div class="mt-8">
+						<button type="submit" name="update_info" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Update Profile</button>
 					</div>
 				</div>
 
-				<div class="shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md">
-					<h2 class="shecy-text-2xl shecy-font-bold shecy-mb-6">Change Password</h2>
-					<p class="shecy-text-sm shecy-text-gray-600 shecy-mb-4">If you would like to change your password, enter a new one below. Otherwise, leave these fields blank.</p>
-					<div class="shecy-space-y-6">
+				<div class="bg-white p-8 rounded-lg shadow-md">
+					<h2 class="text-2xl font-bold mb-6">Change Password</h2>
+					<p class="text-sm text-gray-600 mb-4">If you would like to change your password, enter a new one below. Otherwise, leave these fields blank.</p>
+					<div class="space-y-6">
 						<div>
-							<label for="pass1" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">New Password</label>
-							<input type="password" name="pass1" id="pass1" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<label for="pass1" class="block text-sm font-medium text-gray-700">New Password</label>
+							<input type="password" name="pass1" id="pass1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
-							<label for="pass2" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Confirm New Password</label>
-							<input type="password" name="pass2" id="pass2" class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<label for="pass2" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+							<input type="password" name="pass2" id="pass2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 					</div>
-					<div class="shecy-mt-8">
-						<button type="submit" name="update_password" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-gray-800 hover:shecy-bg-gray-900">Change Password</button>
+					<div class="mt-8">
+						<button type="submit" name="update_password" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900">Change Password</button>
 					</div>
 				</div>
 

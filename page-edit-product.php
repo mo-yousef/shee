@@ -89,34 +89,34 @@ $selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
 ?>
 
 <main id="primary" class="site-main">
-	<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-py-12">
-		<div class="shecy-max-w-2xl shecy-mx-auto shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md">
-			<header class="shecy-text-center shecy-mb-8">
-				<h1 class="shecy-text-3xl shecy-font-bold">Edit Product</h1>
+	<div class="container mx-auto px-4 py-12">
+		<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+			<header class="text-center mb-8">
+				<h1 class="text-3xl font-bold">Edit Product</h1>
 			</header>
 
 			<form id="edit-product-form" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="action" value="edit-product">
 				<?php wp_nonce_field( 'edit_product_' . $product_id, 'edit_product_nonce' ); ?>
 
-				<div class="shecy-space-y-6">
+				<div class="space-y-6">
 					<div>
-						<label for="product_title" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Product Title</label>
-						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						<label for="product_title" class="block text-sm font-medium text-gray-700">Product Title</label>
+						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 					</div>
 
 					<div>
-						<label for="product_description" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Description</label>
-						<textarea name="product_description" id="product_description" rows="5" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+						<label for="product_description" class="block text-sm font-medium text-gray-700">Description</label>
+						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
 					</div>
 
-					<div class="shecy-grid shecy-grid-cols-1 md:shecy-grid-cols-2 shecy-gap-6">
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
-							<label for="product_price" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Price ($)</label>
-							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+							<label for="product_price" class="block text-sm font-medium text-gray-700">Price ($)</label>
+							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
 						</div>
 						<div>
-							<label for="product_category" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Category</label>
+							<label for="product_category" class="block text-sm font-medium text-gray-700">Category</label>
 							<?php
 							wp_dropdown_categories( array(
 								'taxonomy'         => 'shecy_product_category',
@@ -125,29 +125,29 @@ $selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
 								'required'         => true,
 								'selected'         => $selected_category,
 								'hierarchical'     => true,
-								'class'            => 'shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm',
+								'class'            => 'mt-1 block w-full border-gray-300 rounded-md shadow-sm',
 							) );
 							?>
 						</div>
 					</div>
 
 					<div>
-						<label class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Current Image</label>
-						<div class="shecy-mt-1">
+						<label class="block text-sm font-medium text-gray-700">Current Image</label>
+						<div class="mt-1">
 							<?php if ( has_post_thumbnail( $product_id ) ) : ?>
 								<?php echo get_the_post_thumbnail( $product_id, 'thumbnail' ); ?>
 							<?php else: ?>
 								<p>No image set.</p>
 							<?php endif; ?>
 						</div>
-						<label for="product_image" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700 shecy-mt-4">Upload New Image</label>
-						<input type="file" name="product_image" id="product_image" accept="image/*" class="shecy-mt-1 shecy-block shecy-w-full shecy-text-sm shecy-text-gray-500 file:shecy-mr-4 file:shecy-py-2 file:shecy-px-4 file:shecy-rounded-full file:shecy-border-0 file:shecy-text-sm file:shecy-font-semibold file:shecy-bg-pink-50 file:shecy-text-pink-700 hover:file:shecy-bg-pink-100">
-						<p class="shecy-mt-1 shecy-text-xs shecy-text-gray-500">Only upload a new image if you want to replace the current one.</p>
+						<label for="product_image" class="block text-sm font-medium text-gray-700 mt-4">Upload New Image</label>
+						<input type="file" name="product_image" id="product_image" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100">
+						<p class="mt-1 text-xs text-gray-500">Only upload a new image if you want to replace the current one.</p>
 					</div>
 				</div>
 
-				<div class="shecy-mt-8">
-					<button type="submit" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-pink-500 hover:shecy-bg-pink-600">Save Changes</button>
+				<div class="mt-8">
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Save Changes</button>
 				</div>
 			</form>
 		</div>
