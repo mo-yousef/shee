@@ -4,7 +4,6 @@ module.exports = {
     './**/*.php',
     './assets/js/**/*.js',
   ],
-  prefix: 'shecy-',
   theme: {
     extend: {},
   },

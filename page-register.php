@@ -14,7 +14,7 @@ if ( is_user_logged_in() ) {
 $reg_errors = new WP_Error;
 
 // Handle form submission
-if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_POST['action'] == 'shecy-register' ) {
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_POST['action'] == 'register' ) {
 	if ( ! isset( $_POST['register_nonce'] ) || ! wp_verify_nonce( $_POST['register_nonce'], 'shecy_register_action' ) ) {
 		wp_die( 'Security check failed.' );
 	}
@@ -68,15 +68,15 @@ get_header();
 ?>
 
 <main id="primary" class="site-main">
-	<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-py-12">
-		<div class="shecy-max-w-md shecy-mx-auto shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md">
-			<header class="shecy-text-center shecy-mb-8">
-				<h1 class="shecy-text-3xl shecy-font-bold">Create an Account</h1>
-				<p class="shecy-text-gray-600 shecy-mt-2">Join the She Cy community.</p>
+	<div class="container mx-auto px-4 py-12">
+		<div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+			<header class="text-center mb-8">
+				<h1 class="text-3xl font-bold">Create an Account</h1>
+				<p class="text-gray-600 mt-2">Join the She Cy community.</p>
 			</header>
 
 			<?php if ( $reg_errors->has_errors() ) : ?>
-				<div class="shecy-bg-red-100 shecy-border-l-4 shecy-border-red-500 shecy-text-red-700 shecy-p-4 shecy-mb-6" role="alert">
+				<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
 					<?php foreach ( $reg_errors->get_error_messages() as $error ) : ?>
 						<p><?php echo $error; ?></p>
 					<?php endforeach; ?>
@@ -84,36 +84,36 @@ get_header();
 			<?php endif; ?>
 
 			<form id="register-form" method="post">
-				<input type="hidden" name="action" value="shecy-register">
+				<input type="hidden" name="action" value="register">
 				<?php wp_nonce_field( 'shecy_register_action', 'register_nonce' ); ?>
 
-				<div class="shecy-space-y-6">
+				<div class="space-y-6">
 					<div>
-						<label for="user_login" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Username</label>
-						<input type="text" name="user_login" id="user_login" required class="shecy-mt-1 shecy-block shecy-w-full shecy-py-2 shecy-px-3 shecy-border shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						<label for="user_login" class="block text-sm font-medium text-gray-700">Username</label>
+						<input type="text" name="user_login" id="user_login" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
 					</div>
 					<div>
-						<label for="user_email" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Email Address</label>
-						<input type="email" name="user_email" id="user_email" required class="shecy-mt-1 shecy-block shecy-w-full shecy-py-2 shecy-px-3 shecy-border shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						<label for="user_email" class="block text-sm font-medium text-gray-700">Email Address</label>
+						<input type="email" name="user_email" id="user_email" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
 					</div>
 					<div>
-						<label for="user_pass1" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Password</label>
-						<input type="password" name="user_pass1" id="user_pass1" required class="shecy-mt-1 shecy-block shecy-w-full shecy-py-2 shecy-px-3 shecy-border shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						<label for="user_pass1" class="block text-sm font-medium text-gray-700">Password</label>
+						<input type="password" name="user_pass1" id="user_pass1" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
 					</div>
 					<div>
-						<label for="user_pass2" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Confirm Password</label>
-						<input type="password" name="user_pass2" id="user_pass2" required class="shecy-mt-1 shecy-block shecy-w-full shecy-py-2 shecy-px-3 shecy-border shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						<label for="user_pass2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+						<input type="password" name="user_pass2" id="user_pass2" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
 					</div>
 				</div>
 
-				<div class="shecy-mt-8">
-					<button type="submit" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-pink-500 hover:shecy-bg-pink-600">Register</button>
+				<div class="mt-8">
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Register</button>
 				</div>
 
-				<div class="shecy-text-center shecy-mt-6">
-					<p class="shecy-text-sm shecy-text-gray-600">
+				<div class="text-center mt-6">
+					<p class="text-sm text-gray-600">
 						Already have an account?
-						<a href="<?php echo home_url('/login'); ?>" class="shecy-font-medium shecy-text-pink-600 hover:shecy-text-pink-500">
+						<a href="<?php echo home_url('/login'); ?>" class="font-medium text-pink-600 hover:text-pink-500">
 							Log in here
 						</a>
 					</p>

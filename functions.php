@@ -109,8 +109,8 @@ add_action( 'after_setup_theme', 'shecy_setup' );
  * Enqueue scripts and styles.
  */
 function shecy_scripts() {
-	wp_enqueue_style( 'shecy-style', get_stylesheet_uri(), array(), SHECY_VERSION );
-	// wp_enqueue_script( 'shecy-navigation', get_template_directory_uri() . '/js/navigation.js', array(), SHECY_VERSION, true );
+	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), SHECY_VERSION );
+	// wp_enqueue_script( 'navigation', get_template_directory_uri() . '/js/navigation.js', array(), SHECY_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 

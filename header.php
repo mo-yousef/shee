@@ -25,8 +25,8 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'shecy' ); ?></a>
 
-	<header id="masthead" class="site-header shecy-bg-white shecy-shadow-md">
-		<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-flex shecy-justify-between shecy-items-center shecy-py-4">
+	<header id="masthead" class="site-header bg-white shadow-md">
+		<div class="container mx-auto px-4 flex justify-between items-center py-4">
 			<div class="site-branding">
 				<?php
 				if ( has_custom_logo() ) {
@@ -34,32 +34,32 @@
 				} else {
 					if ( is_front_page() && is_home() ) :
 						?>
-						<h1 class="site-title shecy-text-2xl shecy-font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:shecy-text-pink-500"><?php bloginfo( 'name' ); ?></a></h1>
+						<h1 class="site-title text-2xl font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:text-pink-500"><?php bloginfo( 'name' ); ?></a></h1>
 						<?php
 					else :
 						?>
-						<p class="site-title shecy-text-2xl shecy-font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:shecy-text-pink-500"><?php bloginfo( 'name' ); ?></a></p>
+						<p class="site-title text-2xl font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:text-pink-500"><?php bloginfo( 'name' ); ?></a></p>
 						<?php
 					endif;
 				}
 				?>
 			</div><!-- .site-branding -->
 
-			<nav id="site-navigation" class="main-navigation shecy-hidden md:shecy-block">
+			<nav id="site-navigation" class="main-navigation hidden md:block">
 				<?php
 				wp_nav_menu(
 					array(
 						'theme_location' => 'menu-1',
 						'menu_id'        => 'primary-menu',
-						'menu_class'     => 'shecy-flex shecy-space-x-4',
+						'menu_class'     => 'flex space-x-4',
 						'container'      => false,
 					)
 				);
 				?>
 			</nav><!-- #site-navigation -->
 
-			<button class="menu-toggle md:shecy-hidden" aria-controls="primary-menu" aria-expanded="false">
-				<span class="shecy-sr-only">Open menu</span>
+			<button class="menu-toggle md:hidden" aria-controls="primary-menu" aria-expanded="false">
+				<span class="sr-only">Open menu</span>
 				&#9776; <?php // Hamburger icon ?>
 			</button>
 		</div>
