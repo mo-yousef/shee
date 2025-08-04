@@ -107,33 +107,40 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_PO
 get_header();
 ?>
 
-<main id="primary" class="site-main">
-	<div class="container mx-auto px-4 py-12">
-		<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-			<header class="text-center mb-8">
-				<h1 class="text-3xl font-bold">Submit a New Product</h1>
-				<p class="text-gray-600 mt-2">Fill out the form below to add your product to the marketplace.</p>
+<main id="primary" class="site-main bg-gray-50 py-12">
+	<div class="container mx-auto px-4">
+		<div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
+			<header class="text-center mb-10">
+				<h1 class="text-4xl font-extrabold text-gray-800">Submit a New Product</h1>
+				<p class="text-gray-500 mt-2">Showcase your item to the community. Fill out the details below.</p>
 			</header>
 
-			<form id="submit-product-form" method="post" enctype="multipart/form-data">
+			<form id="submit-product-form" method="post" enctype="multipart/form-data" class="space-y-8">
 				<input type="hidden" name="action" value="submit-product">
 				<?php wp_nonce_field( 'submit_product', 'submit_product_nonce' ); ?>
 
-				<div class="space-y-6">
-					<div>
-						<label for="product_title" class="block text-sm font-medium text-gray-700">Product Title <span class="text-red-500">*</span></label>
-						<input type="text" name="product_title" id="product_title" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
-					</div>
+				<div class="p-6 border border-gray-200 rounded-lg">
+					<h3 class="text-lg font-semibold text-gray-700 mb-4">Core Details</h3>
+					<div class="space-y-6">
+						<div>
+							<label for="product_title" class="block text-sm font-medium text-gray-700">Product Title <span class="text-red-500">*</span></label>
+							<input type="text" name="product_title" id="product_title" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
+						</div>
 
-					<div>
-						<label for="product_description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
-						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea>
+						<div>
+							<label for="product_description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
+							<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea>
+							<p class="mt-2 text-xs text-gray-500">Provide a detailed description of your product, including its condition.</p>
+						</div>
 					</div>
+				</div>
 
+				<div class="p-6 border border-gray-200 rounded-lg">
+					<h3 class="text-lg font-semibold text-gray-700 mb-4">Pricing & Category</h3>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="product_price" class="block text-sm font-medium text-gray-700">Price ($) <span class="text-red-500">*</span></label>
-							<input type="number" name="product_price" id="product_price" step="0.01" min="0" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+							<input type="number" name="product_price" id="product_price" step="0.01" min="0" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="product_category" class="block text-sm font-medium text-gray-700">Category <span class="text-red-500">*</span></label>
@@ -145,20 +152,24 @@ get_header();
 								'required'         => true,
 								'show_option_none' => 'Select a category',
 								'hierarchical'     => true,
-								'class'            => 'mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm',
+								'class'            => 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500',
 							) );
 							?>
 						</div>
 					</div>
+				</div>
 
+				<div class="p-6 border border-gray-200 rounded-lg">
+					<h3 class="text-lg font-semibold text-gray-700 mb-4">Product Images</h3>
 					<div>
-						<label for="product_images" class="block text-sm font-medium text-gray-700">Product Images</label>
-						<input type="file" name="product_images[]" id="product_images" accept="image/*" multiple class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100">
+						<label for="product_images" class="block text-sm font-medium text-gray-700">Upload one or more images</label>
+						<input type="file" name="product_images[]" id="product_images" accept="image/*" multiple class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
+						<p class="mt-2 text-xs text-gray-500">The first image will be the main display image.</p>
 					</div>
 				</div>
 
-				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Submit for Review</button>
+				<div class="pt-5">
+					<button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-lg text-base font-medium text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 transition-transform transform hover:scale-105">Submit for Review</button>
 				</div>
 			</form>
 		</div>

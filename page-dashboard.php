@@ -62,6 +62,20 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 			<?php // Right Content Area ?>
 			<div class="w-full md:w-3/4 bg-white p-8 rounded-lg shadow-md">
 
+				<?php if ( isset( $_GET['submitted'] ) ) : ?>
+					<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+						<p>Your submission has been received and is waiting for review.</p>
+					</div>
+				<?php elseif ( isset( $_GET['updated'] ) ) : ?>
+					<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
+						<p>Your submission has been updated successfully.</p>
+					</div>
+				<?php elseif ( isset( $_GET['deleted'] ) ) : ?>
+					<div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6" role="alert">
+						<p>Your submission has been deleted.</p>
+					</div>
+				<?php endif; ?>
+
 				<?php // My Products Tab Content
 				if ( $active_tab === 'products' ) : ?>
 					<div class="flex justify-between items-center mb-4">
