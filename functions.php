@@ -112,6 +112,8 @@ function shecy_scripts() {
 	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), SHECY_VERSION );
 	wp_enqueue_script( 'shecy-main', get_template_directory_uri() . '/assets/js/main.js', array(), SHECY_VERSION, true );
 	wp_enqueue_script( 'alpine', 'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js', array(), null, true );
+	wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css', array(), '4.0' );
+	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js', array(), '4.0', true );
 }
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 
@@ -439,6 +441,37 @@ function shecy_create_system_pages() {
             wp_insert_post( $page_data );
         }
     }
+}
+
+function shecy_get_cyprus_cities() {
+    return array(
+        'Nicosia',
+        'Limassol',
+        'Larnaca',
+        'Paphos',
+        'Famagusta',
+        'Kyrenia',
+    );
+}
+
+function shecy_track_post_views( $post_id ) {
+    if ( ! is_single() ) return;
+    if ( empty( $post_id ) ) {
+        global $post;
+        $post_id = $post->ID;
+    }
+
+    // Use a cookie to track unique views
+    if ( isset( $_COOKIE['shecy_viewed_post_' . $post_id] ) ) {
+        return;
+    }
+
+    $count = get_post_meta( $post_id, 'shecy_post_views', true );
+    $count = empty( $count ) ? 1 : $count + 1;
+    update_post_meta( $post_id, 'shecy_post_views', $count );
+
+    // Set a cookie for 1 hour
+    setcookie( 'shecy_viewed_post_' . $post_id, 'true', time() + 3600, '/' );
 }
 add_action( 'after_switch_theme', 'shecy_create_system_pages' );
 
