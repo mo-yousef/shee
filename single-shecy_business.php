@@ -33,7 +33,7 @@ get_header();
 						if ( $categories && ! is_wp_error( $categories ) ) {
 							$cat_links = array();
 							foreach ( $categories as $category ) {
-								$cat_links[] = '<a href="' . get_term_link( $category ) . '" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-pink-200">' . esc_html( $category->name ) . '</a>';
+								$cat_links[] = '<a href="' . get_term_link( $category ) . '" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-violet-200">' . esc_html( $category->name ) . '</a>';
 							}
 							echo implode( '', $cat_links );
 						}
@@ -74,10 +74,10 @@ get_header();
 							$email = get_post_meta( get_the_ID(), 'business_email', true );
 							$website = get_post_meta( get_the_ID(), 'business_website', true );
 
-							if($location) echo '<p class="flex items-center"><span class="mr-3 text-pink-500">📍</span>' . esc_html($location) . '</p>';
-							if($phone) echo '<p class="flex items-center"><span class="mr-3 text-pink-500">📞</span>' . esc_html($phone) . '</p>';
-							if($email) echo '<p class="flex items-center"><span class="mr-3 text-pink-500">✉️</span><a href="mailto:'.esc_attr($email).'" class="hover:underline">'.esc_html($email).'</a></p>';
-							if($website) echo '<p class="flex items-center"><span class="mr-3 text-pink-500">🌐</span><a href="'.esc_url($website).'" target="_blank" rel="noopener noreferrer" class="hover:underline">'.esc_html($website).'</a></p>';
+							if($location) echo '<p class="flex items-center"><span class="mr-3 text-violet-500">📍</span>' . esc_html($location) . '</p>';
+							if($phone) echo '<p class="flex items-center"><span class="mr-3 text-violet-500">📞</span>' . esc_html($phone) . '</p>';
+							if($email) echo '<p class="flex items-center"><span class="mr-3 text-violet-500">✉️</span><a href="mailto:'.esc_attr($email).'" class="hover:underline">'.esc_html($email).'</a></p>';
+							if($website) echo '<p class="flex items-center"><span class="mr-3 text-violet-500">🌐</span><a href="'.esc_url($website).'" target="_blank" rel="noopener noreferrer" class="hover:underline">'.esc_html($website).'</a></p>';
 							?>
 						</div>
 					</div>
@@ -91,7 +91,7 @@ get_header();
 							</div>
 							<div>
 								<p class="font-bold"><?php the_author(); ?></p>
-								<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" class="text-pink-500 hover:underline text-sm">View profile</a>
+								<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" class="text-violet-500 hover:underline text-sm">View profile</a>
 							</div>
 						</div>
 					</div>

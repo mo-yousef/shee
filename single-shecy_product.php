@@ -42,7 +42,7 @@ get_header();
 						// Price
 						$price = get_post_meta( get_the_ID(), 'product_price', true );
 						if ( $price ) {
-							echo '<p class="text-3xl font-bold text-pink-500 mb-4">$' . esc_html( $price ) . '</p>';
+							echo '<p class="text-3xl font-bold text-violet-500 mb-4">$' . esc_html( $price ) . '</p>';
 						}
 						?>
 
@@ -55,7 +55,7 @@ get_header();
 								echo '<strong>Category:</strong> ';
 								$cat_links = array();
 								foreach ( $categories as $category ) {
-									$cat_links[] = '<a href="' . get_term_link( $category ) . '" class="hover:text-pink-500">' . esc_html( $category->name ) . '</a>';
+									$cat_links[] = '<a href="' . get_term_link( $category ) . '" class="hover:text-violet-500">' . esc_html( $category->name ) . '</a>';
 								}
 								echo implode( ', ', $cat_links );
 								echo '</div>';
@@ -68,7 +68,7 @@ get_header();
 								echo '<strong>Condition:</strong> ';
 								$cond_links = array();
 								foreach ( $conditions as $condition ) {
-									$cond_links[] = '<a href="' . get_term_link( $condition ) . '" class="hover:text-pink-500">' . esc_html( $condition->name ) . '</a>';
+									$cond_links[] = '<a href="' . get_term_link( $condition ) . '" class="hover:text-violet-500">' . esc_html( $condition->name ) . '</a>';
 								}
 								echo implode( ', ', $cond_links );
 								echo '</div>';
@@ -89,7 +89,7 @@ get_header();
 								</div>
 								<div>
 									<p class="font-bold"><?php the_author(); ?></p>
-									<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" class="text-pink-500 hover:underline">View all products from this seller</a>
+									<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" class="text-violet-500 hover:underline">View all products from this seller</a>
 								</div>
 							</div>
 						</div>
@@ -100,18 +100,18 @@ get_header();
 							<form class="space-y-4">
 								<div>
 									<label for="contact-name" class="block text-sm font-medium text-gray-700">Your Name</label>
-									<input type="text" name="contact-name" id="contact-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+									<input type="text" name="contact-name" id="contact-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 								</div>
 								<div>
 									<label for="contact-email" class="block text-sm font-medium text-gray-700">Your Email</label>
-									<input type="email" name="contact-email" id="contact-email" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+									<input type="email" name="contact-email" id="contact-email" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 								</div>
 								<div>
 									<label for="contact-message" class="block text-sm font-medium text-gray-700">Message</label>
-									<textarea name="contact-message" id="contact-message" rows="4" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500"></textarea>
+									<textarea name="contact-message" id="contact-message" rows="4" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea>
 								</div>
 								<div>
-									<button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Send Message</button>
+									<button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Send Message</button>
 									<p class="text-xs text-gray-500 mt-2 text-center">(Note: Form is for display only and not functional yet)</p>
 								</div>
 							</form>

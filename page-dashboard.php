@@ -30,10 +30,10 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 			<?php // Left Sidebar: Tab Navigation ?>
 			<aside class="w-full md:w-1/4">
 				<ul class="space-y-2">
-					<li><a href="?tab=products" class="<?php echo $active_tab === 'products' ? 'bg-pink-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">My Products</a></li>
-					<li><a href="?tab=businesses" class="<?php echo $active_tab === 'businesses' ? 'bg-pink-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">My Businesses</a></li>
-					<li><a href="?tab=profile" class="<?php echo $active_tab === 'profile' ? 'bg-pink-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">My Profile</a></li>
-					<li><a href="?tab=submit" class="<?php echo $active_tab === 'submit' ? 'bg-pink-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">Submit New</a></li>
+					<li><a href="?tab=products" class="<?php echo $active_tab === 'products' ? 'bg-violet-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">My Products</a></li>
+					<li><a href="?tab=businesses" class="<?php echo $active_tab === 'businesses' ? 'bg-violet-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">My Businesses</a></li>
+					<li><a href="?tab=profile" class="<?php echo $active_tab === 'profile' ? 'bg-violet-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">My Profile</a></li>
+					<li><a href="?tab=submit" class="<?php echo $active_tab === 'submit' ? 'bg-violet-500 text-white' : 'bg-white hover:bg-gray-100'; ?> block py-2 px-4 rounded-md font-semibold">Submit New</a></li>
 				</ul>
 			</aside>
 
@@ -48,16 +48,17 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 						'post_type' => 'shecy_product',
 						'author' => $current_user->ID,
 						'posts_per_page' => -1,
+						'post_status' => array('publish', 'pending', 'draft'),
 					) );
 					if ( $products_query->have_posts() ) : ?>
 						<div class="space-y-4">
 						<?php while ( $products_query->have_posts() ) : $products_query->the_post(); ?>
 							<div class="p-4 border rounded-md flex justify-between items-center">
 								<div>
-									<a href="<?php the_permalink(); ?>" class="font-semibold hover:text-pink-500"><?php the_title(); ?></a>
+									<a href="<?php the_permalink(); ?>" class="font-semibold hover:text-violet-500"><?php the_title(); ?></a>
 									<span class="ml-2 text-sm text-white bg-gray-400 px-2 py-1 rounded-full"><?php echo get_post_status(); ?></span>
 								</div>
-								<a href="/edit-product?product_id=<?php the_ID(); ?>" class="text-pink-500 hover:underline">Edit</a>
+								<a href="/edit-product?product_id=<?php the_ID(); ?>" class="text-violet-500 hover:underline">Edit</a>
 							</div>
 						<?php endwhile; wp_reset_postdata(); ?>
 						</div>
@@ -73,16 +74,17 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 						'post_type' => 'shecy_business',
 						'author' => $current_user->ID,
 						'posts_per_page' => -1,
+						'post_status' => array('publish', 'pending', 'draft'),
 					) );
 					if ( $businesses_query->have_posts() ) : ?>
 						<div class="space-y-4">
 						<?php while ( $businesses_query->have_posts() ) : $businesses_query->the_post(); ?>
 							<div class="p-4 border rounded-md flex justify-between items-center">
 								<div>
-									<a href="<?php the_permalink(); ?>" class="font-semibold hover:text-pink-500"><?php the_title(); ?></a>
+									<a href="<?php the_permalink(); ?>" class="font-semibold hover:text-violet-500"><?php the_title(); ?></a>
 									<span class="ml-2 text-sm text-white bg-gray-400 px-2 py-1 rounded-full"><?php echo get_post_status(); ?></span>
 								</div>
-								<a href="/edit-business?business_id=<?php the_ID(); ?>" class="text-pink-500 hover:underline">Edit</a>
+								<a href="/edit-business?business_id=<?php the_ID(); ?>" class="text-violet-500 hover:underline">Edit</a>
 							</div>
 						<?php endwhile; wp_reset_postdata(); ?>
 						</div>
@@ -98,7 +100,7 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 						<p><strong>Email:</strong> <?php echo esc_html( $current_user->user_email ); ?></p>
 						<p><strong>Display Name:</strong> <?php echo esc_html( $current_user->display_name ); ?></p>
 					</div>
-					<a href="/profile-settings" class="mt-6 inline-block bg-pink-500 text-white hover:bg-pink-600 py-2 px-4 rounded-md font-semibold">Edit Profile</a>
+					<a href="/profile-settings" class="mt-6 inline-block bg-violet-500 text-white hover:bg-violet-600 py-2 px-4 rounded-md font-semibold">Edit Profile</a>
 
 				<?php // Submit New Tab Content
 				elseif ( $active_tab === 'submit' ) : ?>

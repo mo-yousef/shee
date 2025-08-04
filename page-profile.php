@@ -86,7 +86,7 @@ $user_info = get_userdata($user_id);
 							<label class="block text-sm font-medium text-gray-700">Avatar</label>
 							<div class="mt-2 flex items-center">
 								<?php echo get_avatar($user_id, 96, '', 'User Avatar', ['class' => 'rounded-full']); ?>
-								<p class="ml-4 text-gray-600">You can change your profile picture on <a href="https://gravatar.com/" target="_blank" class="text-pink-500 hover:underline">Gravatar</a>.</p>
+								<p class="ml-4 text-gray-600">You can change your profile picture on <a href="https://gravatar.com/" target="_blank" class="text-violet-500 hover:underline">Gravatar</a>.</p>
 							</div>
 						</div>
 						<div>
@@ -104,7 +104,7 @@ $user_info = get_userdata($user_id);
 						</div>
 					</div>
 					<div class="mt-8">
-						<button type="submit" name="update_info" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Update Profile</button>
+						<button type="submit" name="update_info" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Update Profile</button>
 					</div>
 				</div>
 

@@ -34,11 +34,11 @@
 				} else {
 					if ( is_front_page() && is_home() ) :
 						?>
-						<h1 class="site-title text-2xl font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:text-pink-500"><?php bloginfo( 'name' ); ?></a></h1>
+						<h1 class="site-title text-2xl font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:text-violet-500"><?php bloginfo( 'name' ); ?></a></h1>
 						<?php
 					else :
 						?>
-						<p class="site-title text-2xl font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:text-pink-500"><?php bloginfo( 'name' ); ?></a></p>
+						<p class="site-title text-2xl font-bold"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="hover:text-violet-500"><?php bloginfo( 'name' ); ?></a></p>
 						<?php
 					endif;
 				}

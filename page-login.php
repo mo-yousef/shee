@@ -71,24 +71,24 @@ get_header();
 
 					<div class="flex items-center justify-between">
 						<div class="flex items-center">
-							<input id="rememberme" name="rememberme" type="checkbox" class="h-4 w-4 text-pink-600 border-gray-300 rounded">
+							<input id="rememberme" name="rememberme" type="checkbox" class="h-4 w-4 text-violet-600 border-gray-300 rounded">
 							<label for="rememberme" class="ml-2 block text-sm text-gray-900">Remember Me</label>
 						</div>
 
 						<div class="text-sm">
-							<a href="<?php echo home_url('/reset-password'); ?>" class="font-medium text-pink-600 hover:text-pink-500">Forgot your password?</a>
+							<a href="<?php echo home_url('/reset-password'); ?>" class="font-medium text-violet-600 hover:text-violet-500">Forgot your password?</a>
 						</div>
 					</div>
 				</div>
 
 				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Log In</button>
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Log In</button>
 				</div>
 
 				<div class="text-center mt-6">
 					<p class="text-sm text-gray-600">
 						Don't have an account?
-						<a href="<?php echo home_url('/register'); ?>" class="font-medium text-pink-600 hover:text-pink-500">
+						<a href="<?php echo home_url('/register'); ?>" class="font-medium text-violet-600 hover:text-violet-500">
 							Register here
 						</a>
 					</p>

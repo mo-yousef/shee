@@ -45,7 +45,7 @@ get_header();
 						<textarea name="contact_message" id="contact_message" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea>
 					</div>
 					<div class="text-right">
-						<button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Send Message</button>
+						<button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Send Message</button>
 					</div>
 				</form>
 			</div>

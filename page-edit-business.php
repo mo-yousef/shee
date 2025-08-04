@@ -144,7 +144,7 @@ $selected_category = ! empty( $business_terms ) ? $business_terms[0]->term_id : 
 				</div>
 
 				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Save Changes</button>
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Save Changes</button>
 				</div>
 			</form>
 		</div>

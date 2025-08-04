@@ -84,7 +84,7 @@ if ( post_password_required() ) {
 
 	$comment_field = '<p class="comment-form-comment"><label for="comment" class="block text-sm font-medium text-gray-700">' . _x( 'Comment', 'noun' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea></p>';
 
-	$submit_button = '<button name="%1$s" type="submit" id="%2$s" class="%3$s w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">%4$s</button>';
+	$submit_button = '<button name="%1$s" type="submit" id="%2$s" class="%3$s w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">%4$s</button>';
 
 	comment_form( array(
 		'fields' => apply_filters( 'comment_form_default_fields', $fields ),

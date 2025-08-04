@@ -22,7 +22,7 @@ get_header();
 		<div class="relative z-10 text-center p-8">
 			<h1 class="text-4xl md:text-6xl font-bold mb-4">Elevate Your Style</h1>
 			<p class="text-lg md:text-xl mb-8">Discover the latest in fashion, beauty, and sustainable style.</p>
-			<a href="/shop" class="bg-pink-500 text-white hover:bg-pink-600 py-3 px-8 rounded-full font-bold text-lg transition-colors">Explore Now</a>
+			<a href="/shop" class="bg-violet-500 text-white hover:bg-violet-600 py-3 px-8 rounded-full font-bold text-lg transition-colors">Explore Now</a>
 		</div>
 	</section>
 
@@ -50,11 +50,11 @@ get_header();
 								</a>
 							<?php endif; ?>
 							<div class="p-6">
-								<h3 class="font-bold text-xl mb-2"><a href="<?php the_permalink(); ?>" class="hover:text-pink-500"><?php the_title(); ?></a></h3>
+								<h3 class="font-bold text-xl mb-2"><a href="<?php the_permalink(); ?>" class="hover:text-violet-500"><?php the_title(); ?></a></h3>
 								<div class="text-gray-600">
 									<?php the_excerpt(); ?>
 								</div>
-								<a href="<?php the_permalink(); ?>" class="text-pink-500 hover:text-pink-600 font-semibold mt-4 inline-block">Read More &rarr;</a>
+								<a href="<?php the_permalink(); ?>" class="text-violet-500 hover:text-violet-600 font-semibold mt-4 inline-block">Read More &rarr;</a>
 							</div>
 						</article>
 						<?php
@@ -94,7 +94,7 @@ get_header();
 								<div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition-opacity"></div>
 							</div>
 							<div class="p-4">
-								<h3 class="font-semibold truncate"><a href="<?php the_permalink(); ?>" class="hover:text-pink-500"><?php the_title(); ?></a></h3>
+								<h3 class="font-semibold truncate"><a href="<?php the_permalink(); ?>" class="hover:text-violet-500"><?php the_title(); ?></a></h3>
 								<p class="text-gray-700 font-bold">
 									<?php
 									// Placeholder for price. This will be a custom field.
@@ -121,18 +121,18 @@ get_header();
 	<?php
 	// Call to Actions Section
 	?>
-	<section class="bg-pink-500 text-white py-16">
+	<section class="bg-violet-500 text-white py-16">
 		<div class="container mx-auto px-4 text-center">
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-				<div class="p-8 bg-pink-400 rounded-lg">
+				<div class="p-8 bg-violet-400 rounded-lg">
 					<h2 class="text-2xl font-bold mb-4">Have something to sell?</h2>
 					<p class="mb-6">Join our community marketplace and give your pre-loved items a new life.</p>
-					<a href="/submit-product" class="bg-white text-pink-500 hover:bg-gray-100 py-3 px-6 rounded-full font-bold transition-colors">Submit a Product</a>
+					<a href="/submit-product" class="bg-white text-violet-500 hover:bg-gray-100 py-3 px-6 rounded-full font-bold transition-colors">Submit a Product</a>
 				</div>
-				<div class="p-8 bg-pink-400 rounded-lg">
+				<div class="p-8 bg-violet-400 rounded-lg">
 					<h2 class="text-2xl font-bold mb-4">Are you a business?</h2>
 					<p class="mb-6">Get featured in our directory and connect with a passionate audience.</p>
-					<a href="/submit-business" class="bg-white text-pink-500 hover:bg-gray-100 py-3 px-6 rounded-full font-bold transition-colors">Promote Your Business</a>
+					<a href="/submit-business" class="bg-white text-violet-500 hover:bg-gray-100 py-3 px-6 rounded-full font-bold transition-colors">Promote Your Business</a>
 				</div>
 			</div>
 		</div>

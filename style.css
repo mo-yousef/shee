@@ -846,17 +846,17 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
 }
-.bg-pink-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(244 114 182 / var(--tw-bg-opacity, 1));
-}
-.bg-pink-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(236 72 153 / var(--tw-bg-opacity, 1));
-}
 .bg-red-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
+}
+.bg-violet-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(167 139 250 / var(--tw-bg-opacity, 1));
+}
+.bg-violet-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(139 92 246 / var(--tw-bg-opacity, 1));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -1000,14 +1000,6 @@ video {
   --tw-text-opacity: 1;
   color: rgb(21 128 61 / var(--tw-text-opacity, 1));
 }
-.text-pink-500 {
-  --tw-text-opacity: 1;
-  color: rgb(236 72 153 / var(--tw-text-opacity, 1));
-}
-.text-pink-600 {
-  --tw-text-opacity: 1;
-  color: rgb(219 39 119 / var(--tw-text-opacity, 1));
-}
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity, 1));
@@ -1015,6 +1007,14 @@ video {
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity, 1));
+}
+.text-violet-500 {
+  --tw-text-opacity: 1;
+  color: rgb(139 92 246 / var(--tw-text-opacity, 1));
+}
+.text-violet-600 {
+  --tw-text-opacity: 1;
+  color: rgb(124 58 237 / var(--tw-text-opacity, 1));
 }
 .text-white {
   --tw-text-opacity: 1;
@@ -1063,9 +1063,9 @@ video {
 .file\:border-0::file-selector-button {
   border-width: 0px;
 }
-.file\:bg-pink-50::file-selector-button {
+.file\:bg-violet-50::file-selector-button {
   --tw-bg-opacity: 1;
-  background-color: rgb(253 242 248 / var(--tw-bg-opacity, 1));
+  background-color: rgb(245 243 255 / var(--tw-bg-opacity, 1));
 }
 .file\:px-4::file-selector-button {
   padding-left: 1rem;
@@ -1082,9 +1082,9 @@ video {
 .file\:font-semibold::file-selector-button {
   font-weight: 600;
 }
-.file\:text-pink-700::file-selector-button {
+.file\:text-violet-700::file-selector-button {
   --tw-text-opacity: 1;
-  color: rgb(190 24 93 / var(--tw-text-opacity, 1));
+  color: rgb(109 40 217 / var(--tw-text-opacity, 1));
 }
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
@@ -1094,21 +1094,21 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
 }
-.hover\:bg-pink-200:hover {
+.hover\:bg-violet-200:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(251 207 232 / var(--tw-bg-opacity, 1));
+  background-color: rgb(221 214 254 / var(--tw-bg-opacity, 1));
 }
-.hover\:bg-pink-600:hover {
+.hover\:bg-violet-600:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(219 39 119 / var(--tw-bg-opacity, 1));
+  background-color: rgb(124 58 237 / var(--tw-bg-opacity, 1));
 }
-.hover\:text-pink-500:hover {
+.hover\:text-violet-500:hover {
   --tw-text-opacity: 1;
-  color: rgb(236 72 153 / var(--tw-text-opacity, 1));
+  color: rgb(139 92 246 / var(--tw-text-opacity, 1));
 }
-.hover\:text-pink-600:hover {
+.hover\:text-violet-600:hover {
   --tw-text-opacity: 1;
-  color: rgb(219 39 119 / var(--tw-text-opacity, 1));
+  color: rgb(124 58 237 / var(--tw-text-opacity, 1));
 }
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
@@ -1117,21 +1117,21 @@ video {
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
-.hover\:file\:bg-pink-100::file-selector-button:hover {
+.hover\:file\:bg-violet-100::file-selector-button:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(252 231 243 / var(--tw-bg-opacity, 1));
+  background-color: rgb(237 233 254 / var(--tw-bg-opacity, 1));
 }
-.focus\:border-pink-500:focus {
+.focus\:border-violet-500:focus {
   --tw-border-opacity: 1;
-  border-color: rgb(236 72 153 / var(--tw-border-opacity, 1));
+  border-color: rgb(139 92 246 / var(--tw-border-opacity, 1));
 }
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
-.focus\:ring-pink-500:focus {
+.focus\:ring-violet-500:focus {
   --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(236 72 153 / var(--tw-ring-opacity, 1));
+  --tw-ring-color: rgb(139 92 246 / var(--tw-ring-opacity, 1));
 }
 .group:hover .group-hover\:opacity-20 {
   opacity: 0.2;
