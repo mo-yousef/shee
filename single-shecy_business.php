@@ -16,7 +16,6 @@ get_header();
 		<?php
 		while ( have_posts() ) :
 			the_post();
-			shecy_track_post_views( get_the_ID() );
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class('max-w-4xl mx-auto'); ?>>
 

@@ -16,7 +16,6 @@ get_header();
 		<?php
 		while ( have_posts() ) :
 			the_post();
-			shecy_track_post_views( get_the_ID() );
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
