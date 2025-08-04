@@ -30,7 +30,7 @@ get_header(); ?>
 						'taxonomy'         => 'shecy_product_category',
 						'name'             => 'shecy_product_category',
 						'hierarchical'     => true,
-						'class'            => 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500',
+						'class'            => 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500',
 						'value_field'      => 'slug',
 						'selected'         => get_query_var( 'shecy_product_category' ),
 					));
@@ -43,7 +43,7 @@ get_header(); ?>
 						'show_option_none' => 'All Conditions',
 						'taxonomy'         => 'shecy_product_condition',
 						'name'             => 'shecy_product_condition',
-						'class'            => 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500',
+						'class'            => 'mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500',
 						'value_field'      => 'slug',
 						'selected'         => get_query_var( 'shecy_product_condition' ),
 					));
@@ -51,7 +51,7 @@ get_header(); ?>
 				</div>
 				<div>
 					<label for="filter-price" class="block text-sm font-medium text-gray-700">Price Range</label>
-					<select id="filter-price" name="price_range" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500">
+					<select id="filter-price" name="price_range" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500">
 						<option value="">All Prices</option>
 						<option value="0-25">$0 - $25</option>
 						<option value="25-50">$25 - $50</option>
@@ -60,7 +60,7 @@ get_header(); ?>
 					</select>
 				</div>
 				<div class="text-right">
-					<button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Filter</button>
+					<button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Filter</button>
 				</div>
 			</form>
 		</section>
@@ -80,7 +80,7 @@ get_header(); ?>
 							<?php endif; ?>
 						</a>
 						<div class="p-4 flex-grow flex flex-col">
-							<h3 class="font-semibold flex-grow mb-2"><a href="<?php the_permalink(); ?>" class="hover:text-pink-500"><?php the_title(); ?></a></h3>
+							<h3 class="font-semibold flex-grow mb-2"><a href="<?php the_permalink(); ?>" class="hover:text-violet-500"><?php the_title(); ?></a></h3>
 							<p class="text-gray-800 font-bold">
 								<?php
 								$price = get_post_meta(get_the_ID(), 'product_price', true);

@@ -37,7 +37,7 @@ get_header(); ?>
 									<span class="mx-1">&bull;</span>
 									<span><?php echo get_the_category_list(', '); ?></span>
 								</div>
-								<?php the_title( sprintf( '<h2 class="entry-title text-xl font-bold"><a href="%s" rel="bookmark" class="hover:text-pink-500">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+								<?php the_title( sprintf( '<h2 class="entry-title text-xl font-bold"><a href="%s" rel="bookmark" class="hover:text-violet-500">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
 							</header>
 
 							<div class="entry-summary text-gray-700 flex-grow">
@@ -45,7 +45,7 @@ get_header(); ?>
 							</div>
 
 							<footer class="entry-footer mt-4">
-								<a href="<?php the_permalink(); ?>" class="text-pink-500 hover:text-pink-600 font-semibold">Read More &rarr;</a>
+								<a href="<?php the_permalink(); ?>" class="text-violet-500 hover:text-violet-600 font-semibold">Read More &rarr;</a>
 							</footer>
 						</div>
 					</article>

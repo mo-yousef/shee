@@ -89,7 +89,7 @@ get_header();
 						</div>
 					</div>
 					<div class="mt-8">
-						<button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-md">Reset Password</button>
+						<button type="submit" class="w-full bg-violet-500 text-white py-3 rounded-md">Reset Password</button>
 					</div>
 				</form>
 			<?php
@@ -106,7 +106,7 @@ get_header();
 						</div>
 					</div>
 					<div class="mt-8">
-						<button type="submit" class="w-full bg-pink-500 text-white py-3 rounded-md">Get New Password</button>
+						<button type="submit" class="w-full bg-violet-500 text-white py-3 rounded-md">Get New Password</button>
 					</div>
 				</form>
 			<?php endif; ?>

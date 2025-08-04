@@ -33,7 +33,7 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_PO
 	$new_post = array(
 		'post_title'    => $title,
 		'post_content'  => $description,
-		'post_status'   => 'draft',
+		'post_status'   => 'pending',
 		'post_type'     => 'shecy_business',
 		'post_author'   => get_current_user_id(),
 	);
@@ -152,12 +152,12 @@ get_header();
 
 					<div>
 						<label for="business_logo" class="block text-sm font-medium text-gray-700">Business Logo / Image</label>
-						<input type="file" name="business_logo" id="business_logo" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100">
+						<input type="file" name="business_logo" id="business_logo" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
 					</div>
 				</div>
 
 				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Submit for Review</button>
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Submit for Review</button>
 				</div>
 			</form>
 		</div>

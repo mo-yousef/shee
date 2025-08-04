@@ -107,13 +107,13 @@ get_header();
 				</div>
 
 				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Register</button>
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Register</button>
 				</div>
 
 				<div class="text-center mt-6">
 					<p class="text-sm text-gray-600">
 						Already have an account?
-						<a href="<?php echo home_url('/login'); ?>" class="font-medium text-pink-600 hover:text-pink-500">
+						<a href="<?php echo home_url('/login'); ?>" class="font-medium text-violet-600 hover:text-violet-500">
 							Log in here
 						</a>
 					</p>

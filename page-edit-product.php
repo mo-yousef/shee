@@ -141,13 +141,13 @@ $selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
 							<?php endif; ?>
 						</div>
 						<label for="product_image" class="block text-sm font-medium text-gray-700 mt-4">Upload New Image</label>
-						<input type="file" name="product_image" id="product_image" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100">
+						<input type="file" name="product_image" id="product_image" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
 						<p class="mt-1 text-xs text-gray-500">Only upload a new image if you want to replace the current one.</p>
 					</div>
 				</div>
 
 				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-pink-500 hover:bg-pink-600">Save Changes</button>
+					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Save Changes</button>
 				</div>
 			</form>
 		</div>
