@@ -90,67 +90,81 @@ $selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
 
 <main id="primary" class="site-main">
 	<div class="container mx-auto px-4 py-12">
-		<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
-			<header class="text-center mb-8">
-				<h1 class="text-3xl font-bold">Edit Product</h1>
-			</header>
+		<form method="post" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="edit-product">
+			<?php wp_nonce_field( 'edit_product_' . $product_id, 'edit_product_nonce' ); ?>
+			<div class="space-y-12">
+				<div class="border-b border-gray-900/10 pb-12">
+					<h2 class="text-base font-semibold leading-7 text-gray-900">Edit Product</h2>
+					<p class="mt-1 text-sm leading-6 text-gray-600">Update the information for your product.</p>
 
-			<form id="edit-product-form" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="action" value="edit-product">
-				<?php wp_nonce_field( 'edit_product_' . $product_id, 'edit_product_nonce' ); ?>
-
-				<div class="space-y-6">
-					<div>
-						<label for="product_title" class="block text-sm font-medium text-gray-700">Product Title</label>
-						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
-					</div>
-
-					<div>
-						<label for="product_description" class="block text-sm font-medium text-gray-700">Description</label>
-						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"><?php echo esc_textarea( $post->post_content ); ?></textarea>
-					</div>
-
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div>
-							<label for="product_price" class="block text-sm font-medium text-gray-700">Price ($)</label>
-							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
+					<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+						<div class="sm:col-span-4">
+							<label for="product_title" class="block text-sm font-medium leading-6 text-gray-900">Product Title</label>
+							<div class="mt-2">
+								<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+							</div>
 						</div>
-						<div>
-							<label for="product_category" class="block text-sm font-medium text-gray-700">Category</label>
-							<?php
-							wp_dropdown_categories( array(
-								'taxonomy'         => 'shecy_product_category',
-								'name'             => 'product_category',
-								'id'               => 'product_category',
-								'required'         => true,
-								'selected'         => $selected_category,
-								'hierarchical'     => true,
-								'class'            => 'mt-1 block w-full border-gray-300 rounded-md shadow-sm',
-							) );
-							?>
-						</div>
-					</div>
 
-					<div>
-						<label class="block text-sm font-medium text-gray-700">Current Image</label>
-						<div class="mt-1">
-							<?php if ( has_post_thumbnail( $product_id ) ) : ?>
-								<?php echo get_the_post_thumbnail( $product_id, 'thumbnail' ); ?>
-							<?php else: ?>
-								<p>No image set.</p>
-							<?php endif; ?>
+						<div class="col-span-full">
+							<label for="product_description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+							<div class="mt-2">
+								<textarea id="product_description" name="product_description" rows="3" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+							</div>
+							<p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about the product.</p>
 						</div>
-						<label for="product_image" class="block text-sm font-medium text-gray-700 mt-4">Upload New Image</label>
-						<input type="file" name="product_image" id="product_image" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100">
-						<p class="mt-1 text-xs text-gray-500">Only upload a new image if you want to replace the current one.</p>
+
+						<div class="sm:col-span-3">
+							<label for="product_price" class="block text-sm font-medium leading-6 text-gray-900">Price ($)</label>
+							<div class="mt-2">
+								<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+							</div>
+						</div>
+
+						<div class="sm:col-span-3">
+							<label for="product_category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
+							<div class="mt-2">
+								<?php
+								shecy_ensure_categories_exist('shecy_product_category');
+								wp_dropdown_categories( array(
+									'taxonomy'         => 'shecy_product_category',
+									'name'             => 'product_category',
+									'id'               => 'product_category',
+									'required'         => true,
+									'selected'         => $selected_category,
+									'hierarchical'     => true,
+									'class'            => 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+								) );
+								?>
+							</div>
+						</div>
+
+						<div class="col-span-full">
+							<label for="product_image" class="block text-sm font-medium leading-6 text-gray-900">Product Image</label>
+							<div class="mt-2 flex items-center gap-x-3">
+								<?php if ( has_post_thumbnail( $product_id ) ) : ?>
+									<?php echo get_the_post_thumbnail( $product_id, 'thumbnail', ['class' => 'h-24 w-24 object-cover rounded-md'] ); ?>
+								<?php else: ?>
+									<svg class="h-24 w-24 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+										<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5a.75.75 0 00.75-.75v-1.94l-2.69-2.69a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
+									</svg>
+								<?php endif; ?>
+								<label for="product_image" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+									<span>Change</span>
+									<input id="product_image" name="product_image" type="file" class="sr-only">
+								</label>
+							</div>
+							<p class="mt-3 text-sm leading-6 text-gray-600">Only upload a new image if you want to replace the current one.</p>
+						</div>
 					</div>
 				</div>
+			</div>
 
-				<div class="mt-8">
-					<button type="submit" class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Save Changes</button>
-				</div>
-			</form>
-		</div>
+			<div class="mt-6 flex items-center justify-end gap-x-6">
+				<a href="<?php echo home_url('/dashboard?tab=products'); ?>" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
+				<button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save Changes</button>
+			</div>
+		</form>
 	</div>
 </main>
 
