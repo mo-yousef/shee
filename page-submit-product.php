@@ -98,18 +98,18 @@ get_header();
 				<div class="space-y-6">
 					<div>
 						<label for="product_title" class="block text-sm font-medium text-gray-700">Product Title <span class="text-red-500">*</span></label>
-						<input type="text" name="product_title" id="product_title" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="product_title" id="product_title" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 
 					<div>
 						<label for="product_description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
-						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea>
+						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea>
 					</div>
 
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="product_price" class="block text-sm font-medium text-gray-700">Price ($) <span class="text-red-500">*</span></label>
-							<input type="number" name="product_price" id="product_price" step="0.01" min="0" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+							<input type="number" name="product_price" id="product_price" step="0.01" min="0" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="product_category" class="block text-sm font-medium text-gray-700">Category <span class="text-red-500">*</span></label>

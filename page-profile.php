@@ -91,15 +91,15 @@ $user_info = get_userdata($user_id);
 						</div>
 						<div>
 							<label for="display_name" class="block text-sm font-medium text-gray-700">Display Name</label>
-							<input type="text" name="display_name" id="display_name" value="<?php echo esc_attr($user_info->display_name); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="text" name="display_name" id="display_name" value="<?php echo esc_attr($user_info->display_name); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="user_email" class="block text-sm font-medium text-gray-700">Email Address</label>
-							<input type="email" name="user_email" id="user_email" value="<?php echo esc_attr($user_info->user_email); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="email" name="user_email" id="user_email" value="<?php echo esc_attr($user_info->user_email); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="description" class="block text-sm font-medium text-gray-700">Biographical Info</label>
-							<textarea name="description" id="description" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea($user_info->description); ?></textarea>
+							<textarea name="description" id="description" rows="4" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"><?php echo esc_textarea($user_info->description); ?></textarea>
 							<p class="mt-2 text-sm text-gray-500">Share a little about yourself. This will be displayed on your author profile.</p>
 						</div>
 					</div>
@@ -114,11 +114,11 @@ $user_info = get_userdata($user_id);
 					<div class="space-y-6">
 						<div>
 							<label for="pass1" class="block text-sm font-medium text-gray-700">New Password</label>
-							<input type="password" name="pass1" id="pass1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="password" name="pass1" id="pass1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="pass2" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
-							<input type="password" name="pass2" id="pass2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="password" name="pass2" id="pass2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 					</div>
 					<div class="mt-8">

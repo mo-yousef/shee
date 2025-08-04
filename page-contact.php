@@ -30,19 +30,19 @@ get_header();
 				<form id="contact-form" class="space-y-6">
 					<div>
 						<label for="contact_name" class="block text-sm font-medium text-gray-700">Your Name</label>
-						<input type="text" name="contact_name" id="contact_name" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="contact_name" id="contact_name" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="contact_email" class="block text-sm font-medium text-gray-700">Your Email</label>
-						<input type="email" name="contact_email" id="contact_email" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="email" name="contact_email" id="contact_email" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="contact_subject" class="block text-sm font-medium text-gray-700">Subject</label>
-						<input type="text" name="contact_subject" id="contact_subject" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="contact_subject" id="contact_subject" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="contact_message" class="block text-sm font-medium text-gray-700">Message</label>
-						<textarea name="contact_message" id="contact_message" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea>
+						<textarea name="contact_message" id="contact_message" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea>
 					</div>
 					<div class="text-right">
 						<button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">Send Message</button>

@@ -61,12 +61,12 @@ get_header();
 				<div class="space-y-6">
 					<div>
 						<label for="log" class="block text-sm font-medium text-gray-700">Username or Email Address</label>
-						<input type="text" name="log" id="log" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="log" id="log" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 
 					<div>
 						<label for="pwd" class="block text-sm font-medium text-gray-700">Password</label>
-						<input type="password" name="pwd" id="pwd" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="password" name="pwd" id="pwd" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 
 					<div class="flex items-center justify-between">

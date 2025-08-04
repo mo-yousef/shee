@@ -102,17 +102,17 @@ get_header();
 				<div class="space-y-6">
 					<div>
 						<label for="business_name" class="block text-sm font-medium text-gray-700">Business Name <span class="text-red-500">*</span></label>
-						<input type="text" name="business_name" id="business_name" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="business_name" id="business_name" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 
 					<div>
 						<label for="business_description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
-						<textarea name="business_description" id="business_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea>
+						<textarea name="business_description" id="business_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea>
 					</div>
 
 					<div>
 						<label for="business_services" class="block text-sm font-medium text-gray-700">Services</label>
-						<textarea name="business_services" id="business_services" rows="3" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" placeholder="e.g. Manicures, Facials, Haircuts"></textarea>
+						<textarea name="business_services" id="business_services" rows="3" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500" placeholder="e.g. Manicures, Facials, Haircuts"></textarea>
 						<p class="mt-2 text-sm text-gray-500">Separate services with a comma.</p>
 					</div>
 
@@ -134,19 +134,19 @@ get_header();
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="business_location" class="block text-sm font-medium text-gray-700">Location / Address</label>
-							<input type="text" name="business_location" id="business_location" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+							<input type="text" name="business_location" id="business_location" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="business_phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-							<input type="tel" name="business_phone" id="business_phone" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+							<input type="tel" name="business_phone" id="business_phone" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="business_email" class="block text-sm font-medium text-gray-700">Contact Email</label>
-							<input type="email" name="business_email" id="business_email" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+							<input type="email" name="business_email" id="business_email" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="business_website" class="block text-sm font-medium text-gray-700">Website URL</label>
-							<input type="url" name="business_website" id="business_website" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" placeholder="https://example.com">
+							<input type="url" name="business_website" id="business_website" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500" placeholder="https://example.com">
 						</div>
 					</div>
 

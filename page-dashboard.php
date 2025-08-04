@@ -11,6 +11,28 @@ if ( ! is_user_logged_in() ) {
 	exit;
 }
 
+// Handle product deletion
+if ( isset( $_POST['action'] ) && $_POST['action'] == 'delete_product' && isset( $_POST['product_id'] ) ) {
+	$product_id = intval( $_POST['product_id'] );
+	if ( wp_verify_nonce( $_POST['_wpnonce'], 'delete_product_' . $product_id ) && current_user_can( 'delete_post', $product_id ) ) {
+		wp_delete_post( $product_id, true );
+		// Redirect to the same page to prevent form resubmission
+		wp_redirect( home_url( '/dashboard?tab=products&deleted=true' ) );
+		exit;
+	}
+}
+
+// Handle business deletion
+if ( isset( $_POST['action'] ) && $_POST['action'] == 'delete_business' && isset( $_POST['business_id'] ) ) {
+	$business_id = intval( $_POST['business_id'] );
+	if ( wp_verify_nonce( $_POST['_wpnonce'], 'delete_business_' . $business_id ) && current_user_can( 'delete_post', $business_id ) ) {
+		wp_delete_post( $business_id, true );
+		// Redirect to the same page to prevent form resubmission
+		wp_redirect( home_url( '/dashboard?tab=businesses&deleted=true' ) );
+		exit;
+	}
+}
+
 get_header();
 
 $current_user = wp_get_current_user();
@@ -42,7 +64,10 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 
 				<?php // My Products Tab Content
 				if ( $active_tab === 'products' ) : ?>
-					<h2 class="text-2xl font-bold mb-4">My Products</h2>
+					<div class="flex justify-between items-center mb-4">
+						<h2 class="text-2xl font-bold">My Products</h2>
+						<a href="/submit-product" class="bg-violet-500 text-white hover:bg-violet-600 py-2 px-4 rounded-md text-sm font-medium">Add New</a>
+					</div>
 					<?php
 					$products_query = new WP_Query( array(
 						'post_type' => 'shecy_product',
@@ -58,7 +83,15 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 									<a href="<?php the_permalink(); ?>" class="font-semibold hover:text-violet-500"><?php the_title(); ?></a>
 									<span class="ml-2 text-sm text-white bg-gray-400 px-2 py-1 rounded-full"><?php echo get_post_status(); ?></span>
 								</div>
-								<a href="/edit-product?product_id=<?php the_ID(); ?>" class="text-violet-500 hover:underline">Edit</a>
+								<div class="flex space-x-4">
+									<a href="/edit-product?product_id=<?php the_ID(); ?>" class="text-violet-500 hover:underline">Edit</a>
+									<form method="post" onsubmit="return confirm('Are you sure you want to delete this product?');">
+										<input type="hidden" name="action" value="delete_product">
+										<input type="hidden" name="product_id" value="<?php the_ID(); ?>">
+										<?php wp_nonce_field( 'delete_product_' . get_the_ID() ); ?>
+										<button type="submit" class="text-red-500 hover:underline">Remove</button>
+									</form>
+								</div>
 							</div>
 						<?php endwhile; wp_reset_postdata(); ?>
 						</div>
@@ -68,7 +101,10 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 
 				<?php // My Businesses Tab Content
 				elseif ( $active_tab === 'businesses' ) : ?>
-					<h2 class="text-2xl font-bold mb-4">My Businesses</h2>
+					<div class="flex justify-between items-center mb-4">
+						<h2 class="text-2xl font-bold">My Businesses</h2>
+						<a href="/submit-business" class="bg-violet-500 text-white hover:bg-violet-600 py-2 px-4 rounded-md text-sm font-medium">Add New</a>
+					</div>
 					<?php
 					$businesses_query = new WP_Query( array(
 						'post_type' => 'shecy_business',
@@ -84,7 +120,15 @@ $active_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'products';
 									<a href="<?php the_permalink(); ?>" class="font-semibold hover:text-violet-500"><?php the_title(); ?></a>
 									<span class="ml-2 text-sm text-white bg-gray-400 px-2 py-1 rounded-full"><?php echo get_post_status(); ?></span>
 								</div>
-								<a href="/edit-business?business_id=<?php the_ID(); ?>" class="text-violet-500 hover:underline">Edit</a>
+								<div class="flex space-x-4">
+									<a href="/edit-business?business_id=<?php the_ID(); ?>" class="text-violet-500 hover:underline">Edit</a>
+									<form method="post" onsubmit="return confirm('Are you sure you want to delete this business?');">
+										<input type="hidden" name="action" value="delete_business">
+										<input type="hidden" name="business_id" value="<?php the_ID(); ?>">
+										<?php wp_nonce_field( 'delete_business_' . get_the_ID() ); ?>
+										<button type="submit" class="text-red-500 hover:underline">Remove</button>
+									</form>
+								</div>
 							</div>
 						<?php endwhile; wp_reset_postdata(); ?>
 						</div>
