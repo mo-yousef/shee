@@ -16,22 +16,35 @@ get_header();
 		<?php
 		while ( have_posts() ) :
 			the_post();
+			shecy_track_post_views( get_the_ID() );
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
 
 					<?php // Left Column: Product Images ?>
 					<div class="product-images">
-						<?php if ( has_post_thumbnail() ) : ?>
+						<?php
+						$gallery_ids = get_post_meta( get_the_ID(), 'product_gallery_ids', true );
+						if ( ! empty( $gallery_ids ) ) :
+						?>
+							<div class="grid grid-cols-1 gap-4">
+								<?php foreach ( $gallery_ids as $attachment_id ) : ?>
+									<a href="<?php echo wp_get_attachment_url( $attachment_id ); ?>" data-fancybox="product-gallery">
+										<?php echo wp_get_attachment_image( $attachment_id, 'large', false, ['class' => 'w-full h-auto rounded-lg shadow-lg overflow-hidden'] ); ?>
+									</a>
+								<?php endforeach; ?>
+							</div>
+						<?php elseif ( has_post_thumbnail() ) : ?>
 							<div class="w-full h-auto rounded-lg shadow-lg overflow-hidden">
-								<?php the_post_thumbnail( 'large' ); ?>
+								<a href="<?php the_post_thumbnail_url('large'); ?>" data-fancybox="product-gallery">
+									<?php the_post_thumbnail( 'large' ); ?>
+								</a>
 							</div>
 						<?php else : ?>
 							<div class="w-full h-96 bg-gray-200 flex items-center justify-center rounded-lg">
 								<span class="text-gray-500">No Image</span>
 							</div>
 						<?php endif; ?>
-						<?php // Placeholder for a gallery below the main image ?>
 					</div>
 
 					<?php // Right Column: Product Details ?>
@@ -73,12 +86,24 @@ get_header();
 								echo implode( ', ', $cond_links );
 								echo '</div>';
 							}
+
+							// Views
+							$views = get_post_meta( get_the_ID(), 'shecy_post_views', true );
+							if ( $views ) {
+								echo '<div class="mr-4 mb-2">';
+								echo '<strong>Views:</strong> ' . esc_html( $views );
+								echo '</div>';
+							}
 							?>
 						</div>
 
 						<div class="prose lg:prose-lg max-w-none mb-8">
 							<?php the_content(); ?>
 						</div>
+
+						<?php if ( get_current_user_id() == $post->post_author ) : ?>
+						<a href="<?php echo home_url('/edit-product?product_id=' . get_the_ID()); ?>" class="inline-block bg-violet-500 text-white hover:bg-violet-600 py-2 px-4 rounded-md text-sm font-medium">Edit Product</a>
+						<?php endif; ?>
 
 						<?php // Seller Information ?>
 						<div class="seller-info p-6 bg-gray-50 rounded-lg mb-8">

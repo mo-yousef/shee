@@ -56,19 +56,53 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_PO
 		if ( ! empty( $price ) ) update_post_meta( $post_id, 'product_price', $price );
 		if ( ! empty( $category_id ) ) wp_set_post_terms( $post_id, array( $category_id ), 'shecy_product_category' );
 
-		// Handle image upload (if a new one is provided)
-		if ( ! empty( $_FILES['product_image']['name'] ) ) {
-			// ... (same upload handling logic as submit-product.php) ...
-			if ( ! function_exists( 'wp_handle_upload' ) ) require_once( ABSPATH . 'wp-admin/includes/file.php' );
-			$movefile = wp_handle_upload( $_FILES['product_image'], array( 'test_form' => false ) );
-			if ( $movefile && ! isset( $movefile['error'] ) ) {
-				$filename = $movefile['file'];
-				$attachment = array('post_mime_type' => $movefile['type'], 'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ), 'post_content' => '', 'post_status' => 'inherit');
-				$attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+		// Handle image upload
+		if ( ! empty( $_FILES['product_images']['name'][0] ) ) {
+			if ( ! function_exists( 'wp_handle_upload' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/file.php' );
 				require_once( ABSPATH . 'wp-admin/includes/image.php' );
-				$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-				wp_update_attachment_metadata( $attach_id, $attach_data );
-				set_post_thumbnail( $post_id, $attach_id );
+			}
+
+			$files = $_FILES['product_images'];
+			$attachment_ids = get_post_meta( $post_id, 'product_gallery_ids', true );
+			if( !is_array($attachment_ids) ) {
+				$attachment_ids = array();
+			}
+
+			foreach ( $files['name'] as $key => $value ) {
+				if ( $files['name'][ $key ] ) {
+					$file = array(
+						'name'     => $files['name'][ $key ],
+						'type'     => $files['type'][ $key ],
+						'tmp_name' => $files['tmp_name'][ $key ],
+						'error'    => $files['error'][ $key ],
+						'size'     => $files['size'][ $key ],
+					);
+
+					$upload_overrides = array( 'test_form' => false );
+					$movefile = wp_handle_upload( $file, $upload_overrides );
+
+					if ( $movefile && ! isset( $movefile['error'] ) ) {
+						$filename = $movefile['file'];
+						$attachment = array(
+							'post_mime_type' => $movefile['type'],
+							'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+							'post_content'   => '',
+							'post_status'    => 'inherit',
+						);
+						$attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+						$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+						wp_update_attachment_metadata( $attach_id, $attach_data );
+						$attachment_ids[] = $attach_id;
+
+						if ( ! has_post_thumbnail( $post_id ) ) {
+							set_post_thumbnail( $post_id, $attach_id );
+						}
+					}
+				}
+			}
+			if ( ! empty( $attachment_ids ) ) {
+				update_post_meta( $post_id, 'product_gallery_ids', $attachment_ids );
 			}
 		}
 
@@ -89,82 +123,68 @@ $selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
 ?>
 
 <main id="primary" class="site-main">
-	<div class="container mx-auto px-4 py-12">
-		<form method="post" enctype="multipart/form-data">
-			<input type="hidden" name="action" value="edit-product">
-			<?php wp_nonce_field( 'edit_product_' . $product_id, 'edit_product_nonce' ); ?>
-			<div class="space-y-12">
-				<div class="border-b border-gray-900/10 pb-12">
-					<h2 class="text-base font-semibold leading-7 text-gray-900">Edit Product</h2>
-					<p class="mt-1 text-sm leading-6 text-gray-600">Update the information for your product.</p>
+	<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-py-12">
+		<div class="shecy-max-w-2xl shecy-mx-auto shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md">
+			<header class="shecy-text-center shecy-mb-8">
+				<h1 class="shecy-text-3xl shecy-font-bold">Edit Product</h1>
+			</header>
 
-					<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-						<div class="sm:col-span-4">
-							<label for="product_title" class="block text-sm font-medium leading-6 text-gray-900">Product Title</label>
-							<div class="mt-2">
-								<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-							</div>
+			<form id="edit-product-form" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="edit-product">
+				<?php wp_nonce_field( 'edit_product_' . $product_id, 'edit_product_nonce' ); ?>
+
+				<div class="shecy-space-y-6">
+					<div>
+						<label for="product_title" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Product Title</label>
+						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+					</div>
+
+					<div>
+						<label for="product_description" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Description</label>
+						<textarea name="product_description" id="product_description" rows="5" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+					</div>
+
+					<div class="shecy-grid shecy-grid-cols-1 md:shecy-grid-cols-2 shecy-gap-6">
+						<div>
+							<label for="product_price" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Price ($)</label>
+							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
 						</div>
-
-						<div class="col-span-full">
-							<label for="product_description" class="block text-sm font-medium leading-6 text-gray-900">Description</label>
-							<div class="mt-2">
-								<textarea id="product_description" name="product_description" rows="3" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"><?php echo esc_textarea( $post->post_content ); ?></textarea>
-							</div>
-							<p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about the product.</p>
-						</div>
-
-						<div class="sm:col-span-3">
-							<label for="product_price" class="block text-sm font-medium leading-6 text-gray-900">Price ($)</label>
-							<div class="mt-2">
-								<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-							</div>
-						</div>
-
-						<div class="sm:col-span-3">
-							<label for="product_category" class="block text-sm font-medium leading-6 text-gray-900">Category</label>
-							<div class="mt-2">
-								<?php
-								shecy_ensure_categories_exist('shecy_product_category');
-								wp_dropdown_categories( array(
-									'taxonomy'         => 'shecy_product_category',
-									'name'             => 'product_category',
-									'id'               => 'product_category',
-									'required'         => true,
-									'selected'         => $selected_category,
-									'hierarchical'     => true,
-									'class'            => 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
-								) );
-								?>
-							</div>
-						</div>
-
-						<div class="col-span-full">
-							<label for="product_image" class="block text-sm font-medium leading-6 text-gray-900">Product Image</label>
-							<div class="mt-2 flex items-center gap-x-3">
-								<?php if ( has_post_thumbnail( $product_id ) ) : ?>
-									<?php echo get_the_post_thumbnail( $product_id, 'thumbnail', ['class' => 'h-24 w-24 object-cover rounded-md'] ); ?>
-								<?php else: ?>
-									<svg class="h-24 w-24 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-										<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5a.75.75 0 00.75-.75v-1.94l-2.69-2.69a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-									</svg>
-								<?php endif; ?>
-								<label for="product_image" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-									<span>Change</span>
-									<input id="product_image" name="product_image" type="file" class="sr-only">
-								</label>
-							</div>
-							<p class="mt-3 text-sm leading-6 text-gray-600">Only upload a new image if you want to replace the current one.</p>
+						<div>
+							<label for="product_category" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Category</label>
+							<?php
+							wp_dropdown_categories( array(
+								'taxonomy'         => 'shecy_product_category',
+								'name'             => 'product_category',
+								'id'               => 'product_category',
+								'required'         => true,
+								'selected'         => $selected_category,
+								'hierarchical'     => true,
+								'class'            => 'shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm',
+							) );
+							?>
 						</div>
 					</div>
-				</div>
-			</div>
 
-			<div class="mt-6 flex items-center justify-end gap-x-6">
-				<a href="<?php echo home_url('/dashboard?tab=products'); ?>" class="text-sm font-semibold leading-6 text-gray-900">Cancel</a>
-				<button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save Changes</button>
-			</div>
-		</form>
+					<div>
+						<label class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Current Image</label>
+						<div class="shecy-mt-1">
+							<?php if ( has_post_thumbnail( $product_id ) ) : ?>
+								<?php echo get_the_post_thumbnail( $product_id, 'thumbnail' ); ?>
+							<?php else: ?>
+								<p>No image set.</p>
+							<?php endif; ?>
+						</div>
+						<label for="product_images" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700 shecy-mt-4">Upload New Images</label>
+						<input type="file" name="product_images[]" id="product_images" accept="image/*" multiple class="shecy-mt-1 shecy-block shecy-w-full shecy-text-sm shecy-text-gray-500 file:shecy-mr-4 file:shecy-py-2 file:shecy-px-4 file:shecy-rounded-full file:shecy-border-0 file:shecy-text-sm file:shecy-font-semibold file:shecy-bg-pink-50 file:shecy-text-pink-700 hover:file:shecy-bg-pink-100">
+						<p class="shecy-mt-1 shecy-text-xs shecy-text-gray-500">Only upload new images if you want to replace the current one.</p>
+					</div>
+				</div>
+
+				<div class="shecy-mt-8">
+					<button type="submit" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-pink-500 hover:shecy-bg-pink-600">Save Changes</button>
+				</div>
+			</form>
+		</div>
 	</div>
 </main>
 
