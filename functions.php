@@ -475,3 +475,27 @@ function shecy_create_default_categories() {
     }
 }
 add_action( 'after_switch_theme', 'shecy_create_default_categories' );
+
+function shecy_ensure_categories_exist( $taxonomy ) {
+    if ( ! taxonomy_exists( $taxonomy ) ) {
+        return;
+    }
+
+    $terms = get_terms( array( 'taxonomy' => $taxonomy, 'hide_empty' => false ) );
+
+    if ( empty( $terms ) ) {
+        if ( $taxonomy === 'shecy_product_category' ) {
+            $categories = array( 'Clothing', 'Shoes', 'Accessories', 'Beauty', 'Home' );
+        } elseif ( $taxonomy === 'shecy_business_category' ) {
+            $categories = array( 'Salons', 'Spas', 'Boutiques', 'Designers', 'Stylists' );
+        } else {
+            return;
+        }
+
+        foreach ( $categories as $category ) {
+            if ( ! term_exists( $category, $taxonomy ) ) {
+                wp_insert_term( $category, $taxonomy );
+            }
+        }
+    }
+}
