@@ -344,3 +344,99 @@ function shecy_password_reset_message( $message, $key, $user_login, $user_data )
     return $message;
 }
 add_filter( 'retrieve_password_message', 'shecy_password_reset_message', 10, 4 );
+
+/**
+ * Create pages dynamically when the theme is activated.
+ */
+function shecy_create_system_pages() {
+    $pages_to_create = array(
+        array(
+            'title' => 'About',
+            'slug' => 'about',
+            'template' => 'page-about.php'
+        ),
+        array(
+            'title' => 'Contact',
+            'slug' => 'contact',
+            'template' => 'page-contact.php'
+        ),
+        array(
+            'title' => 'Dashboard',
+            'slug' => 'dashboard',
+            'template' => 'page-dashboard.php'
+        ),
+        array(
+            'title' => 'Edit Business',
+            'slug' => 'edit-business',
+            'template' => 'page-edit-business.php'
+        ),
+        array(
+            'title' => 'Edit Product',
+            'slug' => 'edit-product',
+            'template' => 'page-edit-product.php'
+        ),
+        array(
+            'title' => 'Login',
+            'slug' => 'login',
+            'template' => 'page-login.php'
+        ),
+        array(
+            'title' => 'Privacy Policy',
+            'slug' => 'privacy-policy',
+            'template' => 'page-privacy.php'
+        ),
+        array(
+            'title' => 'Profile',
+            'slug' => 'profile',
+            'template' => 'page-profile.php'
+        ),
+        array(
+            'title' => 'Register',
+            'slug' => 'register',
+            'template' => 'page-register.php'
+        ),
+        array(
+            'title' => 'Reset Password',
+            'slug' => 'reset-password',
+            'template' => 'page-reset-password.php'
+        ),
+        array(
+            'title' => 'Shop',
+            'slug' => 'shop',
+            'template' => 'page-shop.php'
+        ),
+        array(
+            'title' => 'Submit Business',
+            'slug' => 'submit-business',
+            'template' => 'page-submit-business.php'
+        ),
+        array(
+            'title' => 'Submit Product',
+            'slug' => 'submit-product',
+            'template' => 'page-submit-product.php'
+        ),
+        array(
+            'title' => 'Terms and Conditions',
+            'slug' => 'terms-and-conditions',
+            'template' => 'page-terms.php'
+        )
+    );
+
+    foreach ( $pages_to_create as $page ) {
+        // Check if the page already exists
+        $existing_page = get_page_by_path( $page['slug'] );
+
+        if ( ! $existing_page ) {
+            // Create the page
+            $page_data = array(
+                'post_title'    => $page['title'],
+                'post_name'     => $page['slug'],
+                'post_status'   => 'publish',
+                'post_type'     => 'page',
+                'page_template' => $page['template']
+            );
+            wp_insert_post( $page_data );
+        }
+    }
+}
+add_action( 'after_switch_theme', 'shecy_create_system_pages' );
