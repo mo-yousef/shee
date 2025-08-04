@@ -73,16 +73,16 @@ if ( post_password_required() ) {
 	$fields = array(
 		'author' =>
 			'<p class="comment-form-author"><label for="author" class="block text-sm font-medium text-gray-700">' . __( 'Name', 'shecy' ) . ( $req ? ' <span class="required">*</span>' : '' ) . '</label> ' .
-			'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245"' . $aria_req . ' class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" /></p>',
+			'<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30" maxlength="245"' . $aria_req . ' class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500" /></p>',
 		'email' =>
 			'<p class="comment-form-email"><label for="email" class="block text-sm font-medium text-gray-700">' . __( 'Email', 'shecy' ) . ( $req ? ' <span class="required">*</span>' : '' ) . '</label> ' .
-			'<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . ' class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" /></p>',
+			'<input id="email" name="email" type="email" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30" maxlength="100" aria-describedby="email-notes"' . $aria_req . ' class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500" /></p>',
 		'url' =>
 			'<p class="comment-form-url"><label for="url" class="block text-sm font-medium text-gray-700">' . __( 'Website', 'shecy' ) . '</label>' .
-			'<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm" /></p>',
+			'<input id="url" name="url" type="url" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30" maxlength="200" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500" /></p>',
 	);
 
-	$comment_field = '<p class="comment-form-comment"><label for="comment" class="block text-sm font-medium text-gray-700">' . _x( 'Comment', 'noun' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm"></textarea></p>';
+	$comment_field = '<p class="comment-form-comment"><label for="comment" class="block text-sm font-medium text-gray-700">' . _x( 'Comment', 'noun' ) . '</label><textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea></p>';
 
 	$submit_button = '<button name="%1$s" type="submit" id="%2$s" class="%3$s w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-violet-500 hover:bg-violet-600">%4$s</button>';
 

@@ -111,6 +111,7 @@ add_action( 'after_setup_theme', 'shecy_setup' );
 function shecy_scripts() {
 	wp_enqueue_style( 'style', get_stylesheet_uri(), array(), SHECY_VERSION );
 	wp_enqueue_script( 'shecy-main', get_template_directory_uri() . '/assets/js/main.js', array(), SHECY_VERSION, true );
+	wp_enqueue_script( 'alpine', 'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js', array(), null, true );
 }
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 
@@ -440,3 +441,37 @@ function shecy_create_system_pages() {
     }
 }
 add_action( 'after_switch_theme', 'shecy_create_system_pages' );
+
+/**
+ * Create default categories for products and businesses on theme activation.
+ */
+function shecy_create_default_categories() {
+    $product_categories = array(
+        'Clothing',
+        'Shoes',
+        'Accessories',
+        'Beauty',
+        'Home',
+    );
+
+    foreach ( $product_categories as $category ) {
+        if ( ! term_exists( $category, 'shecy_product_category' ) ) {
+            wp_insert_term( $category, 'shecy_product_category' );
+        }
+    }
+
+    $business_categories = array(
+        'Salons',
+        'Spas',
+        'Boutiques',
+        'Designers',
+        'Stylists',
+    );
+
+    foreach ( $business_categories as $category ) {
+        if ( ! term_exists( $category, 'shecy_business_category' ) ) {
+            wp_insert_term( $category, 'shecy_business_category' );
+        }
+    }
+}
+add_action( 'after_switch_theme', 'shecy_create_default_categories' );

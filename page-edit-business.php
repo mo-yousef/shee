@@ -103,15 +103,15 @@ $selected_category = ! empty( $business_terms ) ? $business_terms[0]->term_id : 
 				<div class="space-y-6">
 					<div>
 						<label for="business_name">Business Name</label>
-						<input type="text" name="business_name" id="business_name" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="business_name" id="business_name" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="business_description">Description</label>
-						<textarea name="business_description" id="business_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+						<textarea name="business_description" id="business_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"><?php echo esc_textarea( $post->post_content ); ?></textarea>
 					</div>
 					<div>
 						<label for="business_services">Services</label>
-						<textarea name="business_services" id="business_services" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea( $business_services ); ?></textarea>
+						<textarea name="business_services" id="business_services" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"><?php echo esc_textarea( $business_services ); ?></textarea>
 					</div>
 					<div>
 						<label for="business_category">Category</label>
@@ -120,19 +120,19 @@ $selected_category = ! empty( $business_terms ) ? $business_terms[0]->term_id : 
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="business_location">Location</label>
-							<input type="text" name="business_location" id="business_location" value="<?php echo esc_attr($business_location); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="text" name="business_location" id="business_location" value="<?php echo esc_attr($business_location); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="business_phone">Phone</label>
-							<input type="tel" name="business_phone" id="business_phone" value="<?php echo esc_attr($business_phone); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="tel" name="business_phone" id="business_phone" value="<?php echo esc_attr($business_phone); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="business_email">Email</label>
-							<input type="email" name="business_email" id="business_email" value="<?php echo esc_attr($business_email); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="email" name="business_email" id="business_email" value="<?php echo esc_attr($business_email); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="business_website">Website</label>
-							<input type="url" name="business_website" id="business_website" value="<?php echo esc_attr($business_website); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="url" name="business_website" id="business_website" value="<?php echo esc_attr($business_website); ?>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 					</div>
 					<div>

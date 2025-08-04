@@ -102,18 +102,18 @@ $selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
 				<div class="space-y-6">
 					<div>
 						<label for="product_title" class="block text-sm font-medium text-gray-700">Product Title</label>
-						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 
 					<div>
 						<label for="product_description" class="block text-sm font-medium text-gray-700">Description</label>
-						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+						<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"><?php echo esc_textarea( $post->post_content ); ?></textarea>
 					</div>
 
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<label for="product_price" class="block text-sm font-medium text-gray-700">Price ($)</label>
-							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 						<div>
 							<label for="product_category" class="block text-sm font-medium text-gray-700">Category</label>

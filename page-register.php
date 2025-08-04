@@ -90,19 +90,19 @@ get_header();
 				<div class="space-y-6">
 					<div>
 						<label for="user_login" class="block text-sm font-medium text-gray-700">Username</label>
-						<input type="text" name="user_login" id="user_login" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="text" name="user_login" id="user_login" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="user_email" class="block text-sm font-medium text-gray-700">Email Address</label>
-						<input type="email" name="user_email" id="user_email" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="email" name="user_email" id="user_email" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="user_pass1" class="block text-sm font-medium text-gray-700">Password</label>
-						<input type="password" name="user_pass1" id="user_pass1" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="password" name="user_pass1" id="user_pass1" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 					<div>
 						<label for="user_pass2" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-						<input type="password" name="user_pass2" id="user_pass2" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm">
+						<input type="password" name="user_pass2" id="user_pass2" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 					</div>
 				</div>
 
