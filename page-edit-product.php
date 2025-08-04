@@ -1,0 +1,159 @@
+<?php
+/**
+ * Template Name: Edit Product
+ *
+ * @package SheCy
+ */
+
+// --- Authentication & Authorization ---
+if ( ! is_user_logged_in() ) {
+	wp_redirect( home_url( '/login' ) );
+	exit;
+}
+
+// Get the product ID from the URL.
+$product_id = isset( $_GET['product_id'] ) ? intval( $_GET['product_id'] ) : 0;
+
+// If no product ID, redirect to dashboard.
+if ( ! $product_id ) {
+	wp_redirect( home_url( '/dashboard' ) );
+	exit;
+}
+
+// Get the post object.
+$post = get_post( $product_id );
+
+// Security check: ensure the current user is the author of the post.
+if ( ! $post || $post->post_author != get_current_user_id() || $post->post_type !== 'shecy_product' ) {
+	wp_die( 'You do not have permission to edit this product.', 'Permission Denied', array( 'response' => 403 ) );
+}
+
+
+// --- Form Processing ---
+if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_POST['action'] == 'edit-product' ) {
+	// Security check
+	if ( ! isset( $_POST['edit_product_nonce'] ) || ! wp_verify_nonce( $_POST['edit_product_nonce'], 'edit_product_' . $product_id ) ) {
+		wp_die( 'Security check failed.' );
+	}
+
+	// Sanitize and prepare post data
+	$title       = sanitize_text_field( $_POST['product_title'] );
+	$description = wp_kses_post( $_POST['product_description'] );
+	$price       = sanitize_text_field( $_POST['product_price'] );
+	$category_id = intval( $_POST['product_category'] );
+
+	$updated_post = array(
+		'ID'           => $product_id,
+		'post_title'   => $title,
+		'post_content' => $description,
+		// 'post_status' remains unchanged, admin controls publishing.
+	);
+
+	$post_id = wp_update_post( $updated_post, true );
+
+	if ( ! is_wp_error( $post_id ) ) {
+		// Update meta and terms
+		if ( ! empty( $price ) ) update_post_meta( $post_id, 'product_price', $price );
+		if ( ! empty( $category_id ) ) wp_set_post_terms( $post_id, array( $category_id ), 'shecy_product_category' );
+
+		// Handle image upload (if a new one is provided)
+		if ( ! empty( $_FILES['product_image']['name'] ) ) {
+			// ... (same upload handling logic as submit-product.php) ...
+			if ( ! function_exists( 'wp_handle_upload' ) ) require_once( ABSPATH . 'wp-admin/includes/file.php' );
+			$movefile = wp_handle_upload( $_FILES['product_image'], array( 'test_form' => false ) );
+			if ( $movefile && ! isset( $movefile['error'] ) ) {
+				$filename = $movefile['file'];
+				$attachment = array('post_mime_type' => $movefile['type'], 'post_title' => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ), 'post_content' => '', 'post_status' => 'inherit');
+				$attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+				require_once( ABSPATH . 'wp-admin/includes/image.php' );
+				$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+				wp_update_attachment_metadata( $attach_id, $attach_data );
+				set_post_thumbnail( $post_id, $attach_id );
+			}
+		}
+
+		wp_redirect( home_url( '/dashboard?tab=products&updated=true' ) );
+		exit;
+	} else {
+		wp_die( 'Error updating product: ' . $post_id->get_error_message() );
+	}
+}
+
+
+get_header();
+
+// --- Pre-populate form data ---
+$product_price = get_post_meta( $product_id, 'product_price', true );
+$product_terms = wp_get_post_terms( $product_id, 'shecy_product_category' );
+$selected_category = ! empty( $product_terms ) ? $product_terms[0]->term_id : 0;
+?>
+
+<main id="primary" class="site-main">
+	<div class="shecy-container shecy-mx-auto shecy-px-4 shecy-py-12">
+		<div class="shecy-max-w-2xl shecy-mx-auto shecy-bg-white shecy-p-8 shecy-rounded-lg shecy-shadow-md">
+			<header class="shecy-text-center shecy-mb-8">
+				<h1 class="shecy-text-3xl shecy-font-bold">Edit Product</h1>
+			</header>
+
+			<form id="edit-product-form" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="action" value="edit-product">
+				<?php wp_nonce_field( 'edit_product_' . $product_id, 'edit_product_nonce' ); ?>
+
+				<div class="shecy-space-y-6">
+					<div>
+						<label for="product_title" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Product Title</label>
+						<input type="text" name="product_title" id="product_title" value="<?php echo esc_attr( $post->post_title ); ?>" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+					</div>
+
+					<div>
+						<label for="product_description" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Description</label>
+						<textarea name="product_description" id="product_description" rows="5" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm"><?php echo esc_textarea( $post->post_content ); ?></textarea>
+					</div>
+
+					<div class="shecy-grid shecy-grid-cols-1 md:shecy-grid-cols-2 shecy-gap-6">
+						<div>
+							<label for="product_price" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Price ($)</label>
+							<input type="number" name="product_price" id="product_price" value="<?php echo esc_attr( $product_price ); ?>" step="0.01" min="0" required class="shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm">
+						</div>
+						<div>
+							<label for="product_category" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Category</label>
+							<?php
+							wp_dropdown_categories( array(
+								'taxonomy'         => 'shecy_product_category',
+								'name'             => 'product_category',
+								'id'               => 'product_category',
+								'required'         => true,
+								'selected'         => $selected_category,
+								'hierarchical'     => true,
+								'class'            => 'shecy-mt-1 shecy-block shecy-w-full shecy-border-gray-300 shecy-rounded-md shecy-shadow-sm',
+							) );
+							?>
+						</div>
+					</div>
+
+					<div>
+						<label class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700">Current Image</label>
+						<div class="shecy-mt-1">
+							<?php if ( has_post_thumbnail( $product_id ) ) : ?>
+								<?php echo get_the_post_thumbnail( $product_id, 'thumbnail' ); ?>
+							<?php else: ?>
+								<p>No image set.</p>
+							<?php endif; ?>
+						</div>
+						<label for="product_image" class="shecy-block shecy-text-sm shecy-font-medium shecy-text-gray-700 shecy-mt-4">Upload New Image</label>
+						<input type="file" name="product_image" id="product_image" accept="image/*" class="shecy-mt-1 shecy-block shecy-w-full shecy-text-sm shecy-text-gray-500 file:shecy-mr-4 file:shecy-py-2 file:shecy-px-4 file:shecy-rounded-full file:shecy-border-0 file:shecy-text-sm file:shecy-font-semibold file:shecy-bg-pink-50 file:shecy-text-pink-700 hover:file:shecy-bg-pink-100">
+						<p class="shecy-mt-1 shecy-text-xs shecy-text-gray-500">Only upload a new image if you want to replace the current one.</p>
+					</div>
+				</div>
+
+				<div class="shecy-mt-8">
+					<button type="submit" class="shecy-w-full shecy-inline-flex shecy-justify-center shecy-py-3 shecy-px-4 shecy-border shecy-border-transparent shecy-shadow-sm shecy-text-base shecy-font-medium shecy-rounded-md shecy-text-white shecy-bg-pink-500 hover:shecy-bg-pink-600">Save Changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</main>
+
+<?php
+get_footer();
+?>
