@@ -10,6 +10,14 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="footer-container">
+            <div class="newsletter-signup">
+                <h3 class="newsletter-signup__title">Subscribe to our newsletter</h3>
+                <p class="newsletter-signup__text">Get the latest updates on new products and upcoming sales.</p>
+                <form class="newsletter-signup__form">
+                    <input type="email" class="newsletter-signup__input" placeholder="Enter your email">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
 			<nav class="footer-navigation" aria-label="Footer Menu">
 				<?php
 				wp_nav_menu(
