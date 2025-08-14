@@ -44,31 +44,47 @@ get_header();
 
             <div class="grid grid-cols-1 mt-8 lg:grid-rows-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:gap-y-16 lg:gap-x-12 xl:gap-x-16">
                 <div class="lg:col-span-3 lg:row-end-1">
-                    <div class="lg:flex lg:items-start">
-                        <div class="lg:order-2 lg:ml-5">
-                            <div class="overflow-hidden border-2 border-transparent rounded-lg">
-                                <?php if (has_post_thumbnail()) : ?>
-                                    <img class="object-cover w-full h-full" src="<?php the_post_thumbnail_url('large'); ?>" alt="<?php the_title_attribute(); ?>">
-                                <?php else : ?>
-                                    <img class="object-cover w-full h-full" src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-placeholder.jpg" alt="Default product image">
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="flex-1 lg:order-1">
-                            <div class="grid grid-cols-5 gap-2">
-                                <?php
-                                $gallery_ids = get_post_meta( get_the_ID(), 'product_gallery_ids', true );
-                                if ( ! empty( $gallery_ids ) ) :
-                                    foreach ( $gallery_ids as $attachment_id ) : ?>
-                                        <div class="overflow-hidden border-2 border-transparent rounded-lg">
-                                            <a href="<?php echo wp_get_attachment_url( $attachment_id ); ?>" data-fancybox="product-gallery">
-                                                <?php echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, ['class' => 'w-full h-full object-cover'] ); ?>
-                                            </a>
-                                        </div>
-                                <?php endforeach; endif; ?>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="product-images">
+						<?php
+						$gallery_ids = get_post_meta( get_the_ID(), 'product_gallery_ids', true );
+						if ( ! empty( $gallery_ids ) ) :
+						?>
+							<!-- Swiper -->
+							<div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper gallery-top mb-4 rounded-lg shadow-lg overflow-hidden">
+								<div class="swiper-wrapper">
+									<?php foreach ( $gallery_ids as $attachment_id ) : ?>
+										<div class="swiper-slide">
+											<a href="<?php echo wp_get_attachment_url( $attachment_id ); ?>" data-fancybox="product-gallery">
+												<?php echo wp_get_attachment_image( $attachment_id, 'large', false, ['class' => 'w-full h-auto'] ); ?>
+											</a>
+										</div>
+									<?php endforeach; ?>
+								</div>
+								<!-- Add Arrows -->
+								<div class="swiper-button-next"></div>
+								<div class="swiper-button-prev"></div>
+							</div>
+							<div class="swiper gallery-thumbs h-24">
+								<div class="swiper-wrapper">
+									<?php foreach ( $gallery_ids as $attachment_id ) : ?>
+										<div class="swiper-slide cursor-pointer rounded-lg overflow-hidden">
+											<?php echo wp_get_attachment_image( $attachment_id, 'thumbnail', false, ['class' => 'w-full h-full object-cover'] ); ?>
+										</div>
+									<?php endforeach; ?>
+								</div>
+							</div>
+						<?php elseif ( has_post_thumbnail() ) : ?>
+							<div class="w-full h-auto rounded-lg shadow-lg overflow-hidden">
+								<a href="<?php the_post_thumbnail_url('large'); ?>" data-fancybox="product-gallery">
+									<?php the_post_thumbnail( 'large' ); ?>
+								</a>
+							</div>
+						<?php else : ?>
+							<div class="w-full h-96 bg-gray-200 flex items-center justify-center rounded-lg">
+                                <img class="object-cover w-full h-full" src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-placeholder.jpg" alt="Default product image">
+							</div>
+						<?php endif; ?>
+					</div>
                 </div>
 
                 <div class="lg:col-span-2 lg:row-end-2 lg:row-span-2">
