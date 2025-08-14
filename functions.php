@@ -128,6 +128,19 @@ function shecy_scripts() {
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 
 /**
+ * A custom walker for the mobile navigation menu.
+ */
+class SheCy_Mobile_Nav_Walker extends Walker_Nav_Menu {
+    function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        $output .= "<div>";
+        $output .= '<a href="' . $item->url . '" class="block py-2 px-3 text-base font-medium rounded-md text-gray-700 hover:bg-gray-50 hover:text-gray-900">';
+        $output .= $item->title;
+        $output .= '</a>';
+        $output .= "</div>";
+    }
+}
+
+/**
  * Custom template tags for this theme.
  */
 // require get_template_directory() . '/inc/template-tags.php';
