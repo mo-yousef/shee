@@ -116,6 +116,7 @@ function shecy_scripts() {
 	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js', array(), '4.0', true );
 	wp_enqueue_style( 'swiper', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), '10.3.1' );
 	wp_enqueue_script( 'swiper', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), '10.3.1', true );
+    wp_enqueue_style( 'shadcn-custom', get_template_directory_uri() . '/assets/css/shadcn-custom.css', array(), SHECY_VERSION );
 
 	if ( is_singular( 'shecy_product' ) ) {
 		wp_enqueue_script( 'product-gallery', get_template_directory_uri() . '/assets/js/product-gallery.js', array( 'swiper' ), SHECY_VERSION, true );
