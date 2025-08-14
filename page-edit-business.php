@@ -17,6 +17,9 @@ if ( ! $business_id ) {
 	exit;
 }
 
+
+
+
 $post = get_post( $business_id );
 if ( ! $post || $post->post_author != get_current_user_id() || $post->post_type !== 'shecy_business' ) {
 	wp_die( 'You do not have permission to edit this business listing.', 'Permission Denied', array( 'response' => 403 ) );
