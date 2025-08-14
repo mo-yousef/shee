@@ -45,42 +45,22 @@ get_header();
 			</div>
 		</div>
 
-		<?php // Latest Products Section ?>
+		<?php // Featured Products Section ?>
 		<section>
 			<div class="container mx-auto px-4">
-				<h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Products</h2>
-				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+				<h2 class="text-2xl font-bold text-gray-900 sm:text-3xl mb-8">Featured Products</h2>
+				<div class="grid grid-cols-2 gap-4 mt-8 sm:mt-12 lg:grid-cols-4 sm:gap-6">
 					<?php
 					$latest_products_query = new WP_Query(array(
 						'post_type' => 'shecy_product',
-						'posts_per_page' => 6,
+						'posts_per_page' => 4,
 						'orderby' => 'date',
 						'order' => 'DESC',
 					));
 
 					if ($latest_products_query->have_posts()) :
 						while ($latest_products_query->have_posts()) : $latest_products_query->the_post();
-							?>
-							<article class="group relative rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-								<a href="<?php the_permalink(); ?>">
-									<?php if (has_post_thumbnail()) : ?>
-										<?php the_post_thumbnail('medium_large', ['class' => 'w-full h-96 object-cover']); ?>
-									<?php else : ?>
-										<div class="w-full h-96 bg-gray-200"></div>
-									<?php endif; ?>
-									<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-									<div class="absolute bottom-0 left-0 p-6">
-										<h3 class="font-semibold text-xl text-white mb-1"><?php the_title(); ?></h3>
-										<p class="text-white/90 text-md font-bold">
-											<?php
-											$price = get_post_meta(get_the_ID(), 'product_price', true);
-											echo $price ? '$' . esc_html($price) : 'Price not set';
-											?>
-										</p>
-									</div>
-								</a>
-							</article>
-							<?php
+							get_template_part( 'template-parts/content', 'product-card' );
 						endwhile;
 						wp_reset_postdata();
 					else :
@@ -94,10 +74,11 @@ get_header();
 			</div>
 		</section>
 
-		<section class="py-12">
+		<?php // Trending Products Section ?>
+		<section class="py-12 sm:py-16 lg:py-20">
 			<div class="container mx-auto px-4">
 				<div class="flex justify-between items-center mb-8">
-					<h2 class="text-3xl font-bold text-gray-800">Trending Products</h2>
+					<h2 class="text-2xl font-bold text-gray-900 sm:text-3xl">Trending Products</h2>
 					<div class="flex space-x-2">
 						<button class="trending-swiper-prev p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
 							<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
@@ -122,25 +103,7 @@ get_header();
 							while ($trending_products_query->have_posts()) : $trending_products_query->the_post();
 								?>
 								<div class="swiper-slide">
-									<article class="group relative rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
-										<a href="<?php the_permalink(); ?>">
-											<?php if (has_post_thumbnail()) : ?>
-												<?php the_post_thumbnail('medium_large', ['class' => 'w-full h-80 object-cover']); ?>
-											<?php else : ?>
-												<div class="w-full h-80 bg-gray-200"></div>
-											<?php endif; ?>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-											<div class="absolute bottom-0 left-0 p-4">
-												<h3 class="font-semibold text-lg text-white mb-1"><?php the_title(); ?></h3>
-												<p class="text-white/90 text-md font-bold">
-													<?php
-													$price = get_post_meta(get_the_ID(), 'product_price', true);
-													echo $price ? '$' . esc_html($price) : 'Price not set';
-													?>
-												</p>
-											</div>
-										</a>
-									</article>
+									<?php get_template_part( 'template-parts/content', 'product-card' ); ?>
 								</div>
 								<?php
 							endwhile;
