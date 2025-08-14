@@ -120,6 +120,10 @@ function shecy_scripts() {
 	if ( is_singular( 'shecy_product' ) ) {
 		wp_enqueue_script( 'product-gallery', get_template_directory_uri() . '/assets/js/product-gallery.js', array( 'swiper' ), SHECY_VERSION, true );
 	}
+
+	if ( is_front_page() ) {
+		wp_enqueue_script( 'home-carousel', get_template_directory_uri() . '/assets/js/home-carousel.js', array( 'swiper' ), SHECY_VERSION, true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 

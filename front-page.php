@@ -10,145 +10,148 @@
 get_header();
 ?>
 
-<main id="primary" class="site-main">
+<main id="primary" class="site-main bg-white">
 
-	<?php // Hero Section ?>
-	<section class="relative bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white h-[70vh] flex items-center justify-center">
-		<div class="absolute inset-0 opacity-20">
-			<img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-placeholder.jpg" alt="Fashion and makeup highlights" class="w-full h-full object-cover">
-		</div>
-		<div class="relative z-10 text-center p-8">
-			<h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">Elevate Your Style</h1>
-			<p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Discover the latest in fashion, beauty, and sustainable style from a vibrant community.</p>
-			<a href="/shop" class="bg-white text-violet-600 hover:bg-gray-100 py-3 px-8 rounded-full font-bold text-lg transition-all transform hover:scale-105">Explore Now</a>
-		</div>
-	</section>
+	<div class="container mx-auto px-4 py-12">
 
-	<?php // Featured Categories Section ?>
-	<section class="py-20 bg-white">
-		<div class="container mx-auto px-4">
-			<h2 class="text-3xl font-bold text-center mb-12">Featured Categories</h2>
-			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+		<div class="text-center py-12">
+			<h1 class="text-4xl font-bold text-gray-800 mb-4">She Cy Marketplace</h1>
+			<p class="text-lg text-gray-600 mb-8">Discover unique items from our community</p>
+			<form role="search" method="get" class="search-form relative max-w-lg mx-auto" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<label class="w-full">
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field w-full py-4 pl-6 pr-16 rounded-full border-2 border-gray-200 focus:outline-none focus:border-violet-500 transition-colors" placeholder="Search products..." value="<?php echo get_search_query(); ?>" name="s" />
+				</label>
+				<button type="submit" class="search-submit absolute top-0 right-0 h-full px-6 text-gray-600 hover:text-violet-600">
+					<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+					</svg>
+				</button>
+				<input type="hidden" name="post_type" value="shecy_product" />
+			</form>
+		</div>
+
+		<div class="category-filters py-6 border-b border-gray-200 mb-12">
+			<div class="flex space-x-4 overflow-x-auto pb-4">
+				<a href="<?php echo get_post_type_archive_link('shecy_product'); ?>" class="py-2 px-4 rounded-full font-semibold text-sm whitespace-nowrap bg-gray-200 text-gray-800 hover:bg-violet-500 hover:text-white transition-colors">All</a>
 				<?php
-				$product_categories = get_terms( array( 'taxonomy' => 'shecy_product_category', 'number' => 5 ) );
-				if ( ! empty( $product_categories ) && ! is_wp_error( $product_categories ) ) {
-					foreach ( $product_categories as $category ) {
-						?>
-						<a href="<?php echo esc_url( get_term_link( $category ) ); ?>" class="text-center group">
-							<div class="p-6 bg-gray-100 rounded-full w-32 h-32 mx-auto flex items-center justify-center transition-all duration-300 group-hover:bg-violet-100 group-hover:shadow-lg">
-								<span class="text-4xl">🛍️</span>
-							</div>
-							<h3 class="mt-4 font-semibold text-lg group-hover:text-violet-600"><?php echo esc_html( $category->name ); ?></h3>
-						</a>
-						<?php
+				$categories = get_terms( array( 'taxonomy' => 'shecy_product_category', 'hide_empty' => false ) );
+				if ( ! empty( $categories ) && ! is_wp_error( $categories ) ) {
+					foreach ( $categories as $category ) {
+						echo '<a href="' . esc_url( get_term_link( $category ) ) . '" class="py-2 px-4 rounded-full font-semibold text-sm whitespace-nowrap bg-gray-100 text-gray-600 hover:bg-violet-500 hover:text-white transition-colors">' . esc_html( $category->name ) . '</a>';
 					}
 				}
 				?>
 			</div>
 		</div>
-	</section>
 
-	<?php // Trending Products Section ?>
-	<section class="py-20 bg-gray-50">
-		<div class="container mx-auto px-4">
-			<h2 class="text-3xl font-bold text-center mb-12">Trending in the Marketplace</h2>
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-				<?php
-				$trending_products_query = new WP_Query(array(
-					'post_type' => 'shecy_product',
-					'posts_per_page' => 4,
-					'orderby' => 'meta_value_num',
-					'meta_key' => 'shecy_post_views',
-					'order' => 'DESC',
-				));
+		<?php // Latest Products Section ?>
+		<section>
+			<div class="container mx-auto px-4">
+				<h2 class="text-3xl font-bold text-gray-800 mb-8">Featured Products</h2>
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+					<?php
+					$latest_products_query = new WP_Query(array(
+						'post_type' => 'shecy_product',
+						'posts_per_page' => 6,
+						'orderby' => 'date',
+						'order' => 'DESC',
+					));
 
-				if ($trending_products_query->have_posts()) :
-					while ($trending_products_query->have_posts()) : $trending_products_query->the_post();
-						?>
-						<article class="bg-white rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
-							<div class="relative">
-								<?php if (has_post_thumbnail()) : ?>
-									<a href="<?php the_permalink(); ?>">
-										<?php the_post_thumbnail('medium_large', ['class' => 'w-full h-64 object-cover']); ?>
-									</a>
-								<?php endif; ?>
-								<div class="absolute top-4 right-4 bg-violet-500 text-white text-xs font-bold px-2 py-1 rounded-full"><?php echo get_the_terms(get_the_ID(), 'shecy_product_category')[0]->name; ?></div>
-							</div>
-							<div class="p-6">
-								<h3 class="font-bold text-xl mb-2 truncate"><a href="<?php the_permalink(); ?>" class="hover:text-violet-600"><?php the_title(); ?></a></h3>
-								<p class="text-gray-800 font-bold text-lg mb-4">
-									<?php
-									$price = get_post_meta(get_the_ID(), 'product_price', true);
-									echo $price ? '$' . esc_html($price) : 'Price not set';
-									?>
-								</p>
-								<div class="flex justify-between items-center text-sm text-gray-600">
-									<span>👁️ <?php echo (int)get_post_meta(get_the_ID(), 'shecy_post_views', true); ?> Views</span>
-									<a href="<?php the_permalink(); ?>" class="bg-violet-500 text-white hover:bg-violet-600 py-2 px-4 rounded-full font-bold text-sm transition-colors">View Details</a>
-								</div>
-							</div>
-						</article>
+					if ($latest_products_query->have_posts()) :
+						while ($latest_products_query->have_posts()) : $latest_products_query->the_post();
+							?>
+							<article class="group relative rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+								<a href="<?php the_permalink(); ?>">
+									<?php if (has_post_thumbnail()) : ?>
+										<?php the_post_thumbnail('medium_large', ['class' => 'w-full h-96 object-cover']); ?>
+									<?php else : ?>
+										<div class="w-full h-96 bg-gray-200"></div>
+									<?php endif; ?>
+									<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+									<div class="absolute bottom-0 left-0 p-6">
+										<h3 class="font-semibold text-xl text-white mb-1"><?php the_title(); ?></h3>
+										<p class="text-white/90 text-md font-bold">
+											<?php
+											$price = get_post_meta(get_the_ID(), 'product_price', true);
+											echo $price ? '$' . esc_html($price) : 'Price not set';
+											?>
+										</p>
+									</div>
+								</a>
+							</article>
+							<?php
+						endwhile;
+						wp_reset_postdata();
+					else :
+						echo '<p>No products found in the marketplace yet.</p>';
+					endif;
+					?>
+				</div>
+				<div class="text-center mt-12">
+					<a href="<?php echo get_post_type_archive_link('shecy_product'); ?>" class="inline-block bg-violet-500 text-white hover:bg-violet-600 py-3 px-8 rounded-full font-bold text-lg transition-all transform hover:scale-105">View More Products</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-12">
+			<div class="container mx-auto px-4">
+				<div class="flex justify-between items-center mb-8">
+					<h2 class="text-3xl font-bold text-gray-800">Trending Products</h2>
+					<div class="flex space-x-2">
+						<button class="trending-swiper-prev p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+							<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+						</button>
+						<button class="trending-swiper-next p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+							<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+						</button>
+					</div>
+				</div>
+				<div class="swiper-container trending-products-swiper">
+					<div class="swiper-wrapper">
 						<?php
-					endwhile;
-					wp_reset_postdata();
-				else :
-					echo '<p>No products found in the marketplace yet.</p>';
-				endif;
-				?>
-			</div>
-		</div>
-	</section>
+						$trending_products_query = new WP_Query(array(
+							'post_type' => 'shecy_product',
+							'posts_per_page' => 10,
+							'orderby' => 'meta_value_num',
+							'meta_key' => 'shecy_post_views',
+							'order' => 'DESC',
+						));
 
-	<?php // Testimonials Section ?>
-	<section class="py-20 bg-white">
-		<div class="container mx-auto px-4">
-			<h2 class="text-3xl font-bold text-center mb-12">What Our Community Says</h2>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div class="bg-gray-50 p-8 rounded-lg shadow-lg">
-					<p class="text-gray-600 mb-6">"This is the best platform to buy and sell pre-loved items. I found so many unique pieces!"</p>
-					<div class="flex items-center">
-						<img src="https://i.pravatar.cc/100?u=a" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
-						<div>
-							<p class="font-bold">Jane Doe</p>
-							<p class="text-sm text-gray-500">Fashion Enthusiast</p>
-						</div>
-					</div>
-				</div>
-				<div class="bg-gray-50 p-8 rounded-lg shadow-lg">
-					<p class="text-gray-600 mb-6">"I love how easy it is to list my products. The community is so supportive and friendly."</p>
-					<div class="flex items-center">
-						<img src="https://i.pravatar.cc/100?u=b" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
-						<div>
-							<p class="font-bold">John Smith</p>
-							<p class="text-sm text-gray-500">Small Business Owner</p>
-						</div>
-					</div>
-				</div>
-				<div class="bg-gray-50 p-8 rounded-lg shadow-lg">
-					<p class="text-gray-600 mb-6">"A fantastic way to discover local businesses and support the community. Highly recommended!"</p>
-					<div class="flex items-center">
-						<img src="https://i.pravatar.cc/100?u=c" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
-						<div>
-							<p class="font-bold">Sarah Johnson</p>
-							<p class="text-sm text-gray-500">Local Shopper</p>
-						</div>
+						if ($trending_products_query->have_posts()) :
+							while ($trending_products_query->have_posts()) : $trending_products_query->the_post();
+								?>
+								<div class="swiper-slide">
+									<article class="group relative rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300">
+										<a href="<?php the_permalink(); ?>">
+											<?php if (has_post_thumbnail()) : ?>
+												<?php the_post_thumbnail('medium_large', ['class' => 'w-full h-80 object-cover']); ?>
+											<?php else : ?>
+												<div class="w-full h-80 bg-gray-200"></div>
+											<?php endif; ?>
+											<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+											<div class="absolute bottom-0 left-0 p-4">
+												<h3 class="font-semibold text-lg text-white mb-1"><?php the_title(); ?></h3>
+												<p class="text-white/90 text-md font-bold">
+													<?php
+													$price = get_post_meta(get_the_ID(), 'product_price', true);
+													echo $price ? '$' . esc_html($price) : 'Price not set';
+													?>
+												</p>
+											</div>
+										</a>
+									</article>
+								</div>
+								<?php
+							endwhile;
+							wp_reset_postdata();
+						endif;
+						?>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-
-	<?php // Call to Actions Section ?>
-	<section class="bg-violet-600 text-white py-20">
-		<div class="container mx-auto px-4 text-center">
-			<h2 class="text-3xl font-bold mb-4">Join Our Vibrant Community</h2>
-			<p class="text-violet-200 mb-8 max-w-2xl mx-auto">Whether you're looking to declutter your closet, find unique treasures, or promote your business, She Cy is the place for you.</p>
-			<div class="flex justify-center gap-4">
-				<a href="/submit-product" class="bg-white text-violet-600 hover:bg-gray-100 py-3 px-8 rounded-full font-bold text-lg transition-all transform hover:scale-105">Submit a Product</a>
-				<a href="/submit-business" class="bg-violet-500 text-white hover:bg-violet-400 py-3 px-8 rounded-full font-bold text-lg transition-all transform hover:scale-105">Promote a Business</a>
-			</div>
-		</div>
-	</section>
+		</section>
+	</div>
 
 </main><!-- #main -->
 
