@@ -114,6 +114,12 @@ function shecy_scripts() {
 	wp_enqueue_script( 'alpine', 'https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js', array(), null, true );
 	wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css', array(), '4.0' );
 	wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js', array(), '4.0', true );
+	wp_enqueue_style( 'swiper', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), '10.3.1' );
+	wp_enqueue_script( 'swiper', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), '10.3.1', true );
+
+	if ( is_singular( 'shecy_product' ) ) {
+		wp_enqueue_script( 'product-gallery', get_template_directory_uri() . '/assets/js/product-gallery.js', array( 'swiper' ), SHECY_VERSION, true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 
@@ -471,7 +477,7 @@ function shecy_track_post_views() {
     // Set a cookie for 1 hour
     setcookie( 'shecy_viewed_post_' . $post_id, 'true', time() + 3600, '/' );
 }
-add_action( 'wp_head', 'shecy_track_post_views' );
+add_action( 'template_redirect', 'shecy_track_post_views' );
 add_action( 'after_switch_theme', 'shecy_create_system_pages' );
 
 /**
