@@ -1,10 +1,10 @@
 <div class="relative overflow-hidden transition-all duration-300 bg-white border border-gray-100 rounded-lg group hover:shadow-xl">
-    <div class="overflow-hidden aspect-w-4 aspect-h-3">
+    <div class="overflow-hidden aspect-w-1 aspect-h-1">
         <a href="<?php the_permalink(); ?>">
             <?php if (has_post_thumbnail()) : ?>
                 <?php the_post_thumbnail('medium_large', ['class' => 'object-cover w-full h-full transition-all duration-300 group-hover:scale-125']); ?>
             <?php else : ?>
-                <div class="w-full h-full bg-gray-200"></div>
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-placeholder.jpg" alt="Default product image" class="object-cover w-full h-full">
             <?php endif; ?>
         </a>
     </div>
