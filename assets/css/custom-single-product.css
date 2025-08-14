@@ -58,6 +58,15 @@
 /* --- Product Gallery --- */
 .product-gallery-wrapper {
     width: 100%;
+    max-width: 600px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+    .product-gallery-wrapper {
+        height: auto;
+    }
 }
 
 .gallery-top {
@@ -137,7 +146,9 @@
 }
 
 .product-meta-list li {
-    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
     border-bottom: 1px solid #eee;
 }
 
