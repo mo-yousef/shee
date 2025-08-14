@@ -9,7 +9,7 @@
 
 if ( ! defined( 'SHECY_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'SHECY_VERSION', '1.0.0' );
+	define( 'SHECY_VERSION', '1.0.1' );
 }
 
 if ( ! function_exists( 'shecy_setup' ) ) :
