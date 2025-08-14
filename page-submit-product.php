@@ -45,6 +45,20 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] && ! empty( $_POST['action'] ) && $_PO
 			wp_set_post_terms( $post_id, array( $category_id ), 'shecy_product_category' );
 		}
 
+		// Save additional meta data
+		if ( ! empty( $_POST['product_condition'] ) ) {
+			update_post_meta( $post_id, 'product_condition', sanitize_text_field( $_POST['product_condition'] ) );
+		}
+		if ( ! empty( $_POST['product_brand'] ) ) {
+			update_post_meta( $post_id, 'product_brand', sanitize_text_field( $_POST['product_brand'] ) );
+		}
+		if ( ! empty( $_POST['product_location'] ) ) {
+			update_post_meta( $post_id, 'product_location', sanitize_text_field( $_POST['product_location'] ) );
+		}
+		if ( ! empty( $_POST['product_phone'] ) ) {
+			update_post_meta( $post_id, 'product_phone', sanitize_text_field( $_POST['product_phone'] ) );
+		}
+
 		// Handle image upload
 		if ( ! empty( $_FILES['product_images']['name'][0] ) ) {
 			if ( ! function_exists( 'wp_handle_upload' ) ) {
@@ -131,6 +145,34 @@ get_header();
 							<label for="product_description" class="block text-sm font-medium text-gray-700">Description <span class="text-red-500">*</span></label>
 							<textarea name="product_description" id="product_description" rows="5" required class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500"></textarea>
 							<p class="mt-2 text-xs text-gray-500">Provide a detailed description of your product, including its condition.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="p-6 border border-gray-200 rounded-lg">
+					<h3 class="text-lg font-semibold text-gray-700 mb-4">Additional Details</h3>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div>
+							<label for="product_condition" class="block text-sm font-medium text-gray-700">Condition</label>
+							<select name="product_condition" id="product_condition" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-violet-500 focus:border-violet-500">
+								<option value="">Select Condition</option>
+								<option value="new">New</option>
+								<option value="used_like_new">Used - Like New</option>
+								<option value="used_good">Used - Good</option>
+								<option value="used_fair">Used - Fair</option>
+							</select>
+						</div>
+						<div>
+							<label for="product_brand" class="block text-sm font-medium text-gray-700">Brand</label>
+							<input type="text" name="product_brand" id="product_brand" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
+						</div>
+						<div>
+							<label for="product_location" class="block text-sm font-medium text-gray-700">Location</label>
+							<input type="text" name="product_location" id="product_location" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
+						</div>
+						<div>
+							<label for="product_phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+							<input type="tel" name="product_phone" id="product_phone" class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-violet-500 focus:border-violet-500">
 						</div>
 					</div>
 				</div>
