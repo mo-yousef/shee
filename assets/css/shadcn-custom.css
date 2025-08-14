@@ -667,3 +667,81 @@ body {
 .user-menu-dropdown a:hover {
     background-color: hsl(var(--accent));
 }
+
+/* --- Marketplace Page --- */
+.marketplace-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.marketplace-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.marketplace-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.marketplace-description {
+    font-size: 1.125rem;
+    color: hsl(var(--muted-foreground));
+    margin-top: 0.5rem;
+}
+
+.marketplace-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .marketplace-layout {
+        grid-template-columns: 240px 1fr;
+    }
+}
+
+.marketplace-filters {
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    background-color: hsl(var(--background));
+    align-self: start; /* Sticks to the top */
+}
+
+.filters-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    background-color: hsl(var(--background));
+}
+
+.no-products-found {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.no-products-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}

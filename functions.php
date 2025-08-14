@@ -126,6 +126,14 @@ function shecy_scripts() {
 	if ( is_front_page() ) {
 		wp_enqueue_script( 'home-carousel', get_template_directory_uri() . '/assets/js/home-carousel.js', array( 'swiper' ), SHECY_VERSION, true );
 	}
+
+    if ( is_post_type_archive( 'shecy_product' ) ) {
+        wp_enqueue_script( 'ajax-filters', get_template_directory_uri() . '/assets/js/ajax-filters.js', array('jquery'), SHECY_VERSION, true );
+        wp_localize_script( 'ajax-filters', 'ajax_object', array(
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'archive_url' => get_post_type_archive_link( 'shecy_product' ),
+        ));
+    }
 }
 add_action( 'wp_enqueue_scripts', 'shecy_scripts' );
 
@@ -141,6 +149,70 @@ class SheCy_Mobile_Nav_Walker extends Walker_Nav_Menu {
         $output .= "</div>";
     }
 }
+
+function shecy_filter_products_ajax_handler() {
+    $args = array(
+        'post_type' => 'shecy_product',
+        'posts_per_page' => -1, // Show all products that match
+    );
+
+    $tax_query = array('relation' => 'AND');
+    if ( isset( $_POST['shecy_product_category'] ) && ! empty( $_POST['shecy_product_category'] ) ) {
+        $tax_query[] = array(
+            'taxonomy' => 'shecy_product_category',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field( $_POST['shecy_product_category'] ),
+        );
+    }
+    if ( isset( $_POST['shecy_product_condition'] ) && ! empty( $_POST['shecy_product_condition'] ) ) {
+        $tax_query[] = array(
+            'taxonomy' => 'shecy_product_condition',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field( $_POST['shecy_product_condition'] ),
+        );
+    }
+    if ( count( $tax_query ) > 1 ) {
+        $args['tax_query'] = $tax_query;
+    }
+
+    $meta_query = array('relation' => 'AND');
+    if ( isset( $_POST['price_range'] ) && ! empty( $_POST['price_range'] ) ) {
+        $price_range = explode( '-', sanitize_text_field( $_POST['price_range'] ) );
+        if ( count( $price_range ) === 2 ) {
+            $meta_query[] = array(
+                'key'     => 'product_price',
+                'value'   => $price_range,
+                'type'    => 'numeric',
+                'compare' => 'BETWEEN',
+            );
+        } elseif ( $price_range[0] === '100+' ) {
+             $meta_query[] = array(
+                'key'     => 'product_price',
+                'value'   => 100,
+                'type'    => 'numeric',
+                'compare' => '>=',
+            );
+        }
+    }
+     if ( count( $meta_query ) > 1 ) {
+        $args['meta_query'] = $meta_query;
+    }
+
+    $query = new WP_Query( $args );
+
+    if ( $query->have_posts() ) :
+        while ( $query->have_posts() ) : $query->the_post();
+            get_template_part( 'template-parts/content', 'product-card' );
+        endwhile;
+        wp_reset_postdata();
+    else :
+        echo '<p>No products found</p>';
+    endif;
+
+    die();
+}
+add_action( 'wp_ajax_filter_products', 'shecy_filter_products_ajax_handler' );
+add_action( 'wp_ajax_nopriv_filter_products', 'shecy_filter_products_ajax_handler' );
 
 /**
  * Custom template tags for this theme.
