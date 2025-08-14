@@ -59,27 +59,7 @@ get_header(); ?>
 						<?php
 						while ( have_posts() ) :
 							the_post();
-							?>
-							<article class="group relative rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 bg-white">
-								<a href="<?php the_permalink(); ?>">
-									<?php if (has_post_thumbnail()) : ?>
-										<?php the_post_thumbnail('medium_large', ['class' => 'w-full h-80 object-cover']); ?>
-									<?php else : ?>
-										<div class="w-full h-80 bg-gray-200"></div>
-									<?php endif; ?>
-									<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-									<div class="absolute bottom-0 left-0 p-4">
-										<h3 class="font-semibold text-lg text-white mb-1"><?php the_title(); ?></h3>
-										<p class="text-white/90 text-md font-bold">
-											<?php
-											$price = get_post_meta(get_the_ID(), 'product_price', true);
-											echo $price ? '$' . esc_html($price) : 'Price not set';
-											?>
-										</p>
-									</div>
-								</a>
-							</article>
-							<?php
+							get_template_part( 'template-parts/content', 'product-card' );
 						endwhile;
 						?>
 					</div>
