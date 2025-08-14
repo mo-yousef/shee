@@ -25,7 +25,6 @@ get_header();
         <div class="product-page-grid">
             <div class="product-gallery-wrapper">
                 <?php
-                // This is the gallery code from the previous step, it remains the same.
                 $gallery_ids = get_post_meta( get_the_ID(), 'product_gallery_ids', true );
                 if ( ! empty( $gallery_ids ) ) :
                 ?>
@@ -69,72 +68,47 @@ get_header();
                 <h1 class="product-title"><?php the_title(); ?></h1>
 
                 <?php
-                $condition = get_post_meta( get_the_ID(), 'product_condition', true );
-                if ( $condition ) : ?>
-                    <div class="product-condition">
-                        <span class="badge"><?php echo esc_html( ucwords( str_replace( '_', ' ', $condition ) ) ); ?></span>
-                    </div>
-                <?php endif; ?>
-
-                <?php
                 $price = get_post_meta( get_the_ID(), 'product_price', true );
                 if ( $price ) : ?>
                 <p class="product-price">$<?php echo esc_html($price); ?></p>
                 <?php endif; ?>
 
-                <div class="product-summary">
-                    <?php // A short summary could go here if available, for now we show the beginning of the content ?>
-                    <?php echo wp_trim_words( get_the_content(), 30, '...' ); ?>
-                </div>
-
-                <div class="product-actions">
-                    <a href="#contact-seller-form" class="btn btn-primary">Contact Seller</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-info-tabs" x-data="{ activeTab: 'description' }">
-            <div class="tabs-list" role="tablist">
-                <button @click="activeTab = 'description'" :class="{ 'active': activeTab === 'description' }" class="tab-trigger" role="tab" aria-controls="tab-description" :aria-selected="activeTab === 'description'">Description</button>
-                <button @click="activeTab = 'details'" :class="{ 'active': activeTab === 'details' }" class="tab-trigger" role="tab" aria-controls="tab-details" :aria-selected="activeTab === 'details'">Details</button>
-                <button @click="activeTab = 'seller'" :class="{ 'active': activeTab === 'seller' }" class="tab-trigger" role="tab" aria-controls="tab-seller" :aria-selected="activeTab === 'seller'">Seller Info</button>
-            </div>
-
-            <div id="tab-description" x-show="activeTab === 'description'" class="tab-content" role="tabpanel">
-                <div class="prose">
+                <div class="product-description">
+                    <h2 class="section-title">Description</h2>
                     <?php the_content(); ?>
                 </div>
-            </div>
 
-            <div id="tab-details" x-show="activeTab === 'details'" class="tab-content" role="tabpanel" style="display: none;">
-                <ul class="product-meta-list">
-                    <?php
-                    $categories = get_the_terms( get_the_ID(), 'shecy_product_category' );
-                    if ( $categories && ! is_wp_error( $categories ) ) {
-                        echo '<li><strong>Category:</strong> ';
-                        $cat_links = array();
-                        foreach ( $categories as $category ) {
-                            $cat_links[] = '<a href="' . get_term_link( $category ) . '">' . esc_html( $category->name ) . '</a>';
+                <div class="product-meta">
+                    <h2 class="section-title">Product Details</h2>
+                    <ul class="product-meta-list">
+                        <?php
+                        $categories = get_the_terms( get_the_ID(), 'shecy_product_category' );
+                        if ( $categories && ! is_wp_error( $categories ) ) {
+                            echo '<li><strong>Category:</strong> ';
+                            $cat_links = array();
+                            foreach ( $categories as $category ) {
+                                $cat_links[] = '<a href="' . get_term_link( $category ) . '">' . esc_html( $category->name ) . '</a>';
+                            }
+                            echo implode( ', ', $cat_links ) . '</li>';
                         }
-                        echo implode( ', ', $cat_links ) . '</li>';
-                    }
-                    if ( $condition ) {
-                        echo '<li><strong>Condition:</strong> ' . esc_html( ucwords( str_replace( '_', ' ', $condition ) ) ) . '</li>';
-                    }
-                    $brand = get_post_meta( get_the_ID(), 'product_brand', true );
-                    if ( $brand ) {
-                        echo '<li><strong>Brand:</strong> ' . esc_html( $brand ) . '</li>';
-                    }
-                    $location = get_post_meta( get_the_ID(), 'product_location', true );
-                    if ( $location ) {
-                        echo '<li><strong>Location:</strong> ' . esc_html( $location ) . '</li>';
-                    }
-                    ?>
-                </ul>
-            </div>
+                        $condition = get_post_meta( get_the_ID(), 'product_condition', true );
+                        if ( $condition ) {
+                            echo '<li><span class="badge">' . esc_html( ucwords( str_replace( '_', ' ', $condition ) ) ) . '</span></li>';
+                        }
+                        $brand = get_post_meta( get_the_ID(), 'product_brand', true );
+                        if ( $brand ) {
+                            echo '<li><strong>Brand:</strong> ' . esc_html( $brand ) . '</li>';
+                        }
+                        $location = get_post_meta( get_the_ID(), 'product_location', true );
+                        if ( $location ) {
+                            echo '<li><strong>Location:</strong> ' . esc_html( $location ) . '</li>';
+                        }
+                        ?>
+                    </ul>
+                </div>
 
-            <div id="tab-seller" x-show="activeTab === 'seller'" class="tab-content" role="tabpanel" style="display: none;">
                 <div class="seller-info-box">
+                    <h2 class="section-title">Seller Information</h2>
                     <div class="seller-info-content">
                         <div class="seller-avatar">
                             <?php echo get_avatar( get_the_author_meta( 'ID' ), 80 ); ?>
@@ -148,6 +122,11 @@ get_header();
                         </div>
                     </div>
                 </div>
+
+                <div class="product-actions">
+                    <a href="#contact-seller-form" class="btn btn-primary">Contact Seller</a>
+                </div>
+
             </div>
         </div>
 
