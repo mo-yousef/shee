@@ -283,3 +283,49 @@
     color: #666;
     margin-top: 1rem;
 }
+
+/* --- Badge --- */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--radius);
+    background-color: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+}
+
+/* --- Tabs --- */
+.product-info-tabs {
+    margin-top: 3rem;
+}
+
+.tabs-list {
+    display: flex;
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.tab-trigger {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: hsl(var(--muted-foreground));
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* Overlap the container's border */
+}
+
+.tab-trigger.active {
+    color: hsl(var(--primary));
+    border-bottom-color: hsl(var(--primary));
+}
+
+.tab-content {
+    padding: 2rem 0;
+}
