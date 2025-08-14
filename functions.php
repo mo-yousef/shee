@@ -119,6 +119,7 @@ function shecy_scripts() {
 
 	if ( is_singular( 'shecy_product' ) ) {
 		wp_enqueue_script( 'product-gallery', get_template_directory_uri() . '/assets/js/product-gallery.js', array( 'swiper' ), SHECY_VERSION, true );
+		wp_enqueue_style( 'custom-single-product', get_template_directory_uri() . '/assets/css/custom-single-product.css', array(), SHECY_VERSION );
 	}
 
 	if ( is_front_page() ) {
